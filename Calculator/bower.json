@@ -1,0 +1,19 @@
+{
+  "name": "Calculator",
+  "version": "0.0.0",
+  "homepage": "https://github.com/RobbertWolfs/Bootcamp",
+  "authors": [
+    "Robbert Wolfs <robbertwolfs@gmail.com>"
+  ],
+  "description": "A simple calculator project with modules",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
