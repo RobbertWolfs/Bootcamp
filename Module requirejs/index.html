@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RequireJS</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container col-md-6" id='calculatorForm'>
+        <div class="result"></div>
+        <form>
+            <div class="form-group">
+                <label for="number1">Number 1 </label>
+                <input type="number" class="form-control" id="number1" placeholder="number">
+            </div>
+            <div class="form-group">
+                <label for="number2">Number 2</label>
+                <input type="number" class="form-control" id="number2" placeholder="number">
+            </div>
+            <button class="btn btn-default add ">Add</button>
+            <button class="btn btn-default mul">Multiply</button>
+        </form>
+    </div>
+    <script data-main='main' src="./bower_components/requirejs/require.js"></script>
+</body>
+
+</html>

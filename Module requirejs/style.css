@@ -1,0 +1,19 @@
+body {
+    background: lightgrey;
+    padding : 10px;
+}
+
+.container {
+    display: block;
+    float: none;
+    margin: 0 auto;
+}
+
+
+.result {
+    padding-bottom : 10px;
+}
+
+form {
+    padding-left : 0px !important;
+}
