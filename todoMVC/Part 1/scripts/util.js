@@ -19,7 +19,10 @@ var util = (function() {
     }
 
     function pluralize(count, word) {
-        return count === 1 ? word : word + 's';
+        if (word) {
+            return count === 1 ? word : word + 's';
+        }
+        return word;
     }
 
     function store(namespace, data) {

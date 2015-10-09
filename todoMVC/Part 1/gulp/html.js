@@ -4,7 +4,8 @@ var minify = require('gulp-minify-css');
 var gulpif = require('gulp-if');
 var useref = require('gulp-useref');
 
-gulp.task('html', function () {
+
+gulp.task('html', function() {
     var assets = useref.assets();
 
     return gulp.src('./*.html')

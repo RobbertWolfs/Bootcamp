@@ -3,34 +3,32 @@ var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
 var eslint = require('gulp-eslint');
 
-
-gulp.task('bSync', function() {
-
+gulp.task('browser-sync', function() {
     browserSync.init({
-        server : {
-            baseDir : './'
+        server: {
+            baseDir: "./"
         }
     });
 
-    gulp.watch("./css/*.scss", ['sass']);
+    gulp.watch("./styles/*.scss", ['sass']);
+    gulp.watch("./scripts/*.js", ['lint']);
     gulp.watch("./*.html").on('change', browserSync.reload);
-    gulp.watch("./js/*.js", ['lint']);
-
 });
 
 gulp.task('sass', function() {
-    gulp.src('./css/app.scss')
+    gulp.src('./styles/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest('./dist/css'))
+        .pipe(gulp.dest('./styles'))
         .pipe(browserSync.stream());
 });
 
+
 gulp.task('lint', function() {
 
-    return gulp.src(['js/*.js'])
+    return gulp.src(['scripts/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
-        .pipe(eslint.failOnError());
+        .pipe(eslint.failOnError())
+        .pipe(browserSync.stream());
 
 });
-
