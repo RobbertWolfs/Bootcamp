@@ -30,11 +30,11 @@ router.get('/:id', function (req, res, next) {
         return num.id === id;
     });
 
-    if (result) {
-        res.send(result);
+    if (!result) {
+        return res.status(404).send('resource not found: ' + req.params.id); // show 404 when id not found
     }
+    return res.send(result);
 
-    res.status(404).send('resource not found: ' + req.params.id); // show 404 when id not found
 });
 
 router.post('/', function (req, res, next) {
@@ -45,7 +45,7 @@ router.post('/', function (req, res, next) {
     body.id = id;
     todos.push(body)
     res.set('location', `http://localhost:8080/api/todos/${id}`);
-    res.status(201).send(body);
+    return res.status(201).send(body);
 
 });
 
@@ -54,14 +54,15 @@ router.put('/:id', function (req, res, next) {
     var body = req.body;
     var result = _.find(todos, num => num.id === id);
 
-    if (result) {
-        result.id = id;
-        result.title = body.title;
-        result.completed = body.completed;
-        res.send(result);
+    if (!result) {
+        return res.status(404).send('resource not found: ' + req.params.id); // show 404 when id not found
     }
 
-    res.status(404).send('resource not found: ' + req.params.id); // show 404 when id not found
+    result.id = id;
+    result.title = body.title;
+    result.completed = body.completed;
+    return res.send(result);
+
 
 });
 
@@ -69,13 +70,14 @@ router.put('/:id', function (req, res, next) {
 router.delete('/:id', function (req, res, next) {
     var id = parseInt(req.params.id);
     var index = _.findIndex(todos, num => num.id === id);
+    var result = todos.splice(index, 1);
 
 
-    if (index) {
-        var result = todos.splice(index, 1);
-        res.send(result);
-    }
-    //res.status(204).send('resource not found'); // show 201 when id not found
+    //if (!result) {
+    //    return res.status(204).send('resource not found'); // show 201 when id not found
+    //}
+
+    return res.send(result);
 
 });
 
