@@ -32,6 +32,6 @@ global.paths = {
 requireDir('./gulp', { recurse : false });
 
 // Default task; start local server & watch for changes.
-gulp.task('serve', ['sass', 'lint', 'browser-sync']);
+gulp.task('serve', ['sass', 'browser-sync']);
 
 gulp.task('build', ['html', 'bower'])

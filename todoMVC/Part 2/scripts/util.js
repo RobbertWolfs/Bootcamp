@@ -1,8 +1,8 @@
-var util = (function() {
+'use strict';
 
-    'use strict';
+class Util {
 
-    function uuid() {
+    uuid() {
         /*jshint bitwise:false */
         var i, random;
         var uuid = '';
@@ -18,14 +18,14 @@ var util = (function() {
         return uuid;
     }
 
-    function pluralize(count, word) {
+    pluralize(count, word) {
         if (word) {
             return count === 1 ? word : word + 's';
         }
         return word;
     }
 
-    function store(namespace, data) {
+    store(namespace, data) {
         if (arguments.length > 1) {
             return localStorage.setItem(namespace, JSON.stringify(data));
         } else {
@@ -33,12 +33,6 @@ var util = (function() {
             return (store && JSON.parse(store)) || [];
         }
     }
+}
 
-    return {
-        uuid : uuid,
-        pluralize : pluralize,
-        store : store
-    }
-
-})();
-
+var util = new Util();

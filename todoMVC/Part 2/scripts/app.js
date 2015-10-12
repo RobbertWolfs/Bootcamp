@@ -8,10 +8,15 @@ jQuery(function ($) {
 
 	var ENTER_KEY = 13;
 	var ESCAPE_KEY = 27;
+	var todoRepo;
 
 	var App = {
 		init: function () {
+			//todoRepo.init();
+
+			todoRepo = new TodoRepo();
 			todoRepo.init();
+
 			this.cacheElements();
 			this.bindEvents();
 
