@@ -73,7 +73,7 @@ router.delete('/:id', function (req, res, next) {
     var result = todos.splice(index, 1);
 
 
-    //if (!result) {
+    //if (!result) { // beter met without van underscore!
     //    return res.status(204).send('resource not found'); // show 201 when id not found
     //}
 
