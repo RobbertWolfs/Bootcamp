@@ -29,7 +29,7 @@ global.paths = {
 };
 
 // Require all tasks in the 'gulp' folder.
-requireDir('./app/gulp', { recurse : false });
+requireDir('./gulp', { recurse : false });
 
 // Default task; start local server & watch for changes.
 gulp.task('default', ['serve']);
