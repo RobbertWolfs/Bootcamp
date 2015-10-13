@@ -1,2 +1,2 @@
 # Euricom Bootcamp
-A collection of excercices made during the bootcamp
+A collection of excercices made during the bootcamp.
