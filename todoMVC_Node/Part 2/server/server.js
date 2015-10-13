@@ -17,3 +17,4 @@ var port = cfg.port;
 var server = app.listen(port, function() {
     console.log('Node server started listening on port:' + port + ' in ' + cfg.env)
 });
+
