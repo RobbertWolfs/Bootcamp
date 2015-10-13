@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var _ = require('underscore');
+//var mongoose = require('mongoose');
+//var cfg = require('../config');
+//var db = mongoose.createConnection(cfg.mongo.uri, cfg.mongo.db);
+
 
 var todos = [{
     id: 1,
