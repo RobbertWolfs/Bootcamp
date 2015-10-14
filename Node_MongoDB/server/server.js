@@ -16,7 +16,7 @@ var authorization = require('./middlewares/authorization');
 app.use(morgan('dev'));
 
 // authorization
-app.use(authorization(3434));
+app.use(authorization('open sesame'));
 
 //express setup
 app.use(bodyParser.urlencoded({

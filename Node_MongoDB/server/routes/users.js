@@ -10,6 +10,9 @@ var mongoose = require('mongoose');
 router.get('/', function (req, res, next) {
 
 
+    console.log('get', req.user.name); // log authorization name
+
+
     var pageSize = req.query.pageSize || 100 ;
     var page = req.query.page || 0;
 
