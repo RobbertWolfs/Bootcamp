@@ -7,10 +7,18 @@ var mongoose = require('mongoose');
 var cfg = require('./config');
 var faker = require('faker');
 var UserModel = require('./models/users');
+var authorization = require('./middlewares/authorization');
+
+
 
 
 //express setup
 app.use(morgan('dev'));
+
+// authorization
+app.use(authorization(3434));
+
+//express setup
 app.use(bodyParser.urlencoded({
     extended: true
 }));
