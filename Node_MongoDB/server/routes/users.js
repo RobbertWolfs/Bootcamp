@@ -1,12 +1,28 @@
 var express = require('express');
 var router = express.Router();
-var userModel = require('../models/users');
+var UserModel = require('../models/users');
 var userMapper = require('../mappers/users');
 var _ = require('underscore');
+var mongoose = require('mongoose');
+
 
 //routes
 router.get('/', function (req, res, next) {
-    userModel.find(function (err, users) {
+
+
+    //var pageSize = 100;
+    //var page = 0;
+
+    //if(req.query.pageSize) {
+    //    pageSize = req.query.size;
+    //}
+    //
+    //if(req.query.page) {
+    //    page = req.query.page;
+    //}
+
+
+    UserModel.find({}).limit(req.query.size).skip(req.query.size * req.query.page).exec(function (err, users) {
         var filteredUsers = [];
         filteredUsers = _.map(users, function (user) {
             return userMapper.map(user);
@@ -16,7 +32,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/:id', function (req, res, next) {
-    userModel.findOne({
+    UserModel.findOne({
         _id: req.params.id
     }, function (err, user) {
         if (user) {
@@ -33,7 +49,7 @@ router.post('/', function (req, res, next) {
        return  showError(res, 400);
     }
 
-    var user = new userModel({ // dit geeft al een nieuwe _id per product
+    var user = new UserModel({ // dit geeft al een nieuwe _id per product
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         age: req.body.age,
@@ -58,7 +74,7 @@ router.put('/:id', function (req, res, next) {
         return showError(res, 400);
     }
 
-    userModel.findOne({
+    UserModel.findOne({
         _id: req.params.id
     }, function (err, user) {
 
@@ -84,7 +100,7 @@ router.put('/:id', function (req, res, next) {
 
 
 router.delete('/:id', function (req, res, next) {
-    userModel.findOne({
+    UserModel.findOne({
         _id: req.params.id
     }, function (err, user) {
         if (!user) {
