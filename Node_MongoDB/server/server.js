@@ -8,6 +8,7 @@ var cfg = require('./config');
 var faker = require('faker');
 var UserModel = require('./models/users');
 var authorization = require('./middlewares/authorization');
+var globalErrorHandler = require('./middlewares/globalErrorHandler');
 
 
 
@@ -16,7 +17,7 @@ var authorization = require('./middlewares/authorization');
 app.use(morgan('dev'));
 
 // authorization
-app.use(authorization('open sesame'));
+//app.use(authorization('open sesame'));
 
 //express setup
 app.use(bodyParser.urlencoded({
@@ -66,3 +67,7 @@ function onInsert(err, docs) {
         return console.info('%d potatoes were successfully stored.', docs.length);
     }
 }
+
+
+// Error handling
+app.use(globalErrorHandler());
