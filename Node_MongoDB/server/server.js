@@ -35,7 +35,7 @@ UserModel.findOne({}, function (err, user) {
                 firstName : faker.name.firstName(),
                 lastName : faker.name.lastName(),
                 email : faker.internet.email(),
-                age : 1,
+                age : faker.random.number(100),
                 homeAddress : {
                     addressLine : faker.address.streetAddress(),
                     city : faker.address.city(),

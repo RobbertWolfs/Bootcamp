@@ -10,19 +10,10 @@ var mongoose = require('mongoose');
 router.get('/', function (req, res, next) {
 
 
-    //var pageSize = 100;
-    //var page = 0;
+    var pageSize = req.query.pageSize || 100 ;
+    var page = req.query.page || 0;
 
-    //if(req.query.pageSize) {
-    //    pageSize = req.query.size;
-    //}
-    //
-    //if(req.query.page) {
-    //    page = req.query.page;
-    //}
-
-
-    UserModel.find({}).limit(req.query.size).skip(req.query.size * req.query.page).exec(function (err, users) {
+    UserModel.find({}).limit(pageSize).skip(pageSize * page).sort(req.query.sort).exec(function (err, users) {
         var filteredUsers = [];
         filteredUsers = _.map(users, function (user) {
             return userMapper.map(user);
@@ -46,7 +37,7 @@ router.get('/:id', function (req, res, next) {
 router.post('/', function (req, res, next) {
 
     if (!((req.body.firstName && req.body.lastName) && req.body.email)) {
-       return  showError(res, 400);
+        return showError(res, 400);
     }
 
     var user = new UserModel({ // dit geeft al een nieuwe _id per product
@@ -62,7 +53,7 @@ router.post('/', function (req, res, next) {
     });
 
     user.save(function () {
-        res.set('location', `localhost:3000/api/users/${user._id}`);
+        res.set('location', `localhost:3000/api/users/${user.id}`);
         return res.status(201).send(userMapper.map(user));
     });
 });
