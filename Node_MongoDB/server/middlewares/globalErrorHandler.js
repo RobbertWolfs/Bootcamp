@@ -5,7 +5,11 @@ var globalErrorHandler = function () {
 
     return function (err, req, res, next) {
 
+        console.log(err);
+        console.log(err.stack);
+
         if (err.status) {
+
 
             var errorObject = {
                 code: err.status,

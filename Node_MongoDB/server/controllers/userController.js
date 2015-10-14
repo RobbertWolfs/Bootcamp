@@ -31,13 +31,27 @@ var repository = {
         });
         return deferred.promise;
     },
+
     save: function (model) {
         var deferred = Q.defer();
-        model.save(function (err) {
+        model.save(function (err, model) {
             if (err)
                 return deferred.reject(err);
             deferred.resolve(model);
         });
+        return deferred.promise;
+    },
+
+    delete: function (user) {
+        var deferred = Q.defer();
+
+        user.remove(function (err) {
+            if (err)
+                return deferred.reject(err);
+
+            deferred.resolve(user);
+        });
+
         return deferred.promise;
     }
 };
@@ -51,8 +65,6 @@ module.exports = {
 
         repository.findAll({}, pageSize, page, sort)
             .then(function (users) {
-
-
                 filteredUsers = _.map(users, function (user) {
                     return userMapper.map(user);
                 });
@@ -64,11 +76,8 @@ module.exports = {
     },
 
     findOne: function (req, res, next) {
-
-        repository.findOne(
-            {
-                _id: req.params.id
-            })
+        var query = {_id: req.params.id};
+        repository.findOne(query)
             .then(function (user) {
                 if (!user) {
                     return next(error(404));
@@ -79,21 +88,6 @@ module.exports = {
             .catch(function (err) {
                 next(err);
             });
-
-
-        //UserModel.findOne({
-        //    _id: req.params.id
-        //}, function (err, user) {
-        //
-        //
-        //    //error afhandeling
-        //    //if (err) { return next(err); }
-        //    if (err || !user) {
-        //        return next(error(404));
-        //    }
-        //
-        //    return res.status(200).send(userMapper.map(user));
-        //});
     },
 
     create: function (req, res, next) {
@@ -109,18 +103,18 @@ module.exports = {
             }
         });
 
-        user.save(function () {
-            //res.set('location', `localhost:3000/api/users/${user.id}`);
-            return res.status(201).send(userMapper.map(user));
-        });
+        repository.save(user)
+            .then(function (user) {
+                return res.status(201).send(userMapper.map(user));
+            })
+            .catch(function (err) {
+                next(err);
+            });
     },
 
     update: function (req, res, next) {
-        repository.findOne({
-            _id: req.params.id
-        })
+        repository.findOne({_id: req.params.id})
             .then(function (user) {
-
                 if (!user)
                     return next(error(404));
 
@@ -135,65 +129,40 @@ module.exports = {
 
                 return repository.save(user);
             })
-            .then(function (model) {
+            .then(function (user) {
                 // called after repository.save() is finished
-
-                console.log('then');
-                return res.status(201).send(userMapper.map(model));
+                return res.status(201).send(userMapper.map(user));
             })
             .catch(function (err) {
                 return next(err);
             });
-
-
-        //UserModel.findOne({
-        //    _id: req.params.id
-        //}, function (err, user) {
-        //
-        //    //error afhandeling
-        //    if (err || !user) {
-        //        return next(error(404));
-        //    }
-        //
-        //    user.id = req.params.id;
-        //    user.firstName = req.body.firstName;
-        //    user.lastName = req.body.lastName;
-        //    user.age = req.body.age;
-        //    user.email = req.body.email;
-        //    user.homeAddress.addressLine = req.body.addressLine;
-        //    user.homeAddress.city = req.body.city;
-        //    user.homeAddress.zip = req.body.zip;
-        //
-        //    user.save(function (err) {
-        //
-        //        if(err) return next(err);
-        //
-        //        return res.status(201).send(userMapper.map(user));
-        //    });
-
-        //});
     },
 
     delete: function (req, res, next) {
-        UserModel.findOne({
+        repository.findOne({
             _id: req.params.id
-        }, function (err, user) {
+        })
+            .then(function (user) {
+                if (!user)
+                    return next(error(404));
 
-            if (err || !user) {
-                return next(error(204));
-            }
+                return repository.delete(user);
 
-
-            user.remove(function (err) {
-                if (err) {
-                    return next(err);
-                }
-
+            })
+            .then(function (user) {
                 return res.status(200).send(userMapper.map(user));
+            })
+            .catch(function (err) {
+                return next(err);
             });
-
-        });
     }
 
 };
 
+
+function error(status, details) {
+    var error = new Error('An error occured');
+    error.status = status;
+    error.details = details;
+    return error;
+}
