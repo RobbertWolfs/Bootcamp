@@ -9,19 +9,25 @@ var fromAddress = 'noreply@euri.com';
 
 mailSystem.init = function(from) {
     fromAddress = from;
-}
+};
 
 mailSystem.sendWelcomeMail = function(to, subject, model) {
+
+    if(to == '') {
+        throw new Error('to who');
+    }
+
     var body = template("Hello {name}, this mail is concerning...", model);
     var mail = {
         toAddress: to,
         fromAddress: fromAddress,
         subject: subject,
         body: body
-    }
+    };
 
     smtpTransport.send(mail);
-}
+};
+
 
 mailSystem.transferEuriMails = function(backend) {
     // get mail from db
@@ -32,6 +38,8 @@ mailSystem.transferEuriMails = function(backend) {
         return (s.include(mail.to, 'euri.com'));
     });
 
+
     // transfer to backend
     backend.transfer(filteredMails);
-}
+};
+

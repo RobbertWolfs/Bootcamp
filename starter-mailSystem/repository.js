@@ -6,4 +6,4 @@ module.exports = {
             { id: 123, to: 'wim.vanhoye@euri.com', body: 'bbb...'}
         ]
     }
-}
+};
