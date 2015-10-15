@@ -62,9 +62,6 @@ describe('module', function () {
 
         mailSystem.transferEuriMails(backend);
         expect(stub).to.have.been.called;
-        var mails = stub.returnValues[0][0];
-        expect(mails).to.include.keys(['to', 'id', 'body']);
-
         var transfer = backend.transfer;
         expect(transfer).to.have.been.called;
         var filteredMails = transfer.args[0][0][0];
