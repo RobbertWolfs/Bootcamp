@@ -1,4 +1,7 @@
+//var mongoose = require('mongoose');
 var mongoose = require('mongoose');
+
+
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
@@ -10,21 +13,14 @@ var userSchema = new Schema({
         addressLine: String,
         city: String,
         zip: Number
-    }
+    },
+    apiKeys : [
+        {
+            name : String,
+            encryptedKey : String
+        }
+    ]
 });
 
 var UserModel = mongoose.model('User', userSchema);
-
-// var User = mongoose.model('User', {
-//     firstName: String,
-//     lastName: String,
-//     age: Number,
-//     email: String,
-//     homeAddress: {
-//         addressLine: String,
-//         city: String,
-//         zip: Number
-//     }
-// });
-
 module.exports = UserModel;

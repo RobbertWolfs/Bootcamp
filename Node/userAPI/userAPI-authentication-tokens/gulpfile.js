@@ -7,6 +7,6 @@ gulp.task('connect', function () {
   , ext: 'js html'
   , env: { 'NODE_ENV': 'development' }
   })
-})
+});
 
 gulp.task('serve', ['connect']);

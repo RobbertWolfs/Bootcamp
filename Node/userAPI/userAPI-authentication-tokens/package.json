@@ -10,10 +10,14 @@
     "express": "^4.13.3",
     "faker": "^3.0.1",
     "http-status": "^0.2.0",
+    "jwt-simple": "^0.3.1",
     "mongoose": "^4.1.10",
+    "mongoose-q": "^0.1.0",
     "morgan": "^1.6.1",
     "q": "^1.4.1",
+    "randomstring": "^1.1.0",
     "schema-inspector": "^1.5.5",
+    "sha256": "^0.2.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

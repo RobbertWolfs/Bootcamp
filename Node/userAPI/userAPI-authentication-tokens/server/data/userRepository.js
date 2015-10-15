@@ -21,7 +21,7 @@ module.exports = {
     findOne: function(query) {
         var deferred = Q.defer();
         UserModel.findOne(query, function(err, user) {
-            console.log('findone', user)
+            //console.log('findone', user)
             if (err)
                 return deferred.resolve(null);
             deferred.resolve(user);
@@ -37,7 +37,7 @@ module.exports = {
             if (err)
                 return deferred.reject(err);
             deferred.resolve(user);
-        })
+        });
         return deferred.promise;
     },
 
@@ -47,7 +47,7 @@ module.exports = {
             if (err)
                 return deferred.reject(err);
             deferred.resolve(user);
-        })
+        });
         return deferred.promise;
     }
-}
+};

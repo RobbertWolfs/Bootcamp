@@ -2,7 +2,8 @@ var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var userApi = require('./routes/users');
-var authorize = require('./middleware/authorize');
+var authApi = require('./routes/auth');
+var auth = require('./middleware/authorize');
 var globalErrorHandler = require('./middleware/globalErrorHandler');
 var cors = require('cors');
 var mongoose = require('mongoose');
@@ -28,11 +29,16 @@ User.findOne(null, function(err, user){
     }
 });
 
+
+var secret = 'FBf96vtlWSrMSLChIkkF';  // beter in een NODE ENV steken
+
 // middleware
+ app.use(auth.authorization(secret));
 // app.use(authorize('12345'));
 
 // routes
-app.use('/api/users', userApi);
+app.use('/api/users',  userApi);
+app.use('/api/auth', authApi);
 
 // middleware - error handlers
 app.use(globalErrorHandler());

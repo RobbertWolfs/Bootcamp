@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 module.exports = {
     map: function map(user){
         var userResource = {
@@ -7,8 +9,13 @@ module.exports = {
             email: user.email,
             address: user.homeAddress.addressLine,
             city: user.homeAddress.city,
-            zip: user.homeAddress.zip
-        }
+            zip: user.homeAddress.zip,
+            apiKeys : _.map(user.apiKeys, function(key) {
+                return {
+                    name : key.name
+                }
+            })
+        };
         return userResource;
     }
-}
+};

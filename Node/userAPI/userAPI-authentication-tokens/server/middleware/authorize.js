@@ -1,15 +1,36 @@
 var HttpError = require('../HttpError');
+var jwt = require('jwt-simple');
 
-module.exports = function authorization(password) {
-    return function authorization(req, res, next) {
-        if (req.headers.authorization === password) {
-            req.user = {
-                id: 1221321,
-                name: 'peter',
-                role: 'admin'
+
+module.exports = {
+
+
+    authorization: function (secret) {
+        return function authorization(req, res, next) {
+            if (req.headers.accesstoken) {
+
+                try {
+                    var decoded = jwt.decode(req.headers.accesstoken, secret);
+                } catch(e) {
+                    next(new HttpError(401));
+                }
+
+                req.user = decoded;
             }
-            return next();
+            next();
         }
-        next(new HttpError(401));
+    },
+
+    authenticate: function() {
+        return function (req, res, next) {
+
+            if (!req.user) {
+                return next(new HttpError(401));
+            }
+
+            next();
+
+        }
     }
-}
+
+};
