@@ -11,8 +11,8 @@
 
     function myService($http) {
 
-        function getUsers(sort) {
-            return $http.get('http://localhost:3000/api/users?pageSize=12&sort=' + sort);
+        function getUsers(page, sort) {
+            return $http.get('http://localhost:3000/api/users?pageSize=50&page=' + (page++) + '&sort=' + sort);
         }
 
 
