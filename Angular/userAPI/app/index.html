@@ -40,14 +40,14 @@
 
     <table class="table table-striped" style="width:100%">
         <tr>
-            <th><a href="" ng-click="sortTableBy('name')" >Name <span class="sortorder" ng-show="sortBy === 'name'" ng-class="{reverse:reverse}"></span></a></th>
+            <th>Name <span class="sortorder" ng-show="sortBy === 'name'" ng-class="{reverse:reverse}"></span></th>
             <th><a href=""  ng-click="sortTableBy('email')" >Email <span class="sortorder" ng-show="sortBy === 'email'" ng-class="{reverse:reverse}"></span></a></th>
-            <th><a href=""  ng-click="sortTableBy('address')" >Address <span class="sortorder" ng-show="sortBy === 'address'" ng-class="{reverse:reverse}"></span></a></th>
-            <th><a href=""  ng-click="sortTableBy('zip')" >Zip <span class="sortorder" ng-show="sortBy === 'zip'" ng-class="{reverse:reverse}"></span></a></th>
-            <th><a href=""  ng-click="sortTableBy('city')" >City <span class="sortorder" ng-show="sortBy === 'city'" ng-class="{reverse:reverse}"></span></a></th>
+            <th>Address <span class="sortorder" ng-show="sortBy === 'address'" ng-class="{reverse:reverse}"></span></th>
+            <th>Zip <span class="sortorder" ng-show="sortBy === 'zip'" ng-class="{reverse:reverse}"></span></th>
+            <th>City <span class="sortorder" ng-show="sortBy === 'city'" ng-class="{reverse:reverse}"></span></th>
             <th></th>
         </tr>
-        <tr ng-repeat="user in users | orderBy:sortBy:reverse">
+        <tr ng-repeat="user in users">
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.address }}</td>

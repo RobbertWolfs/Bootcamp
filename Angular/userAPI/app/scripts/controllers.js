@@ -9,10 +9,10 @@
 
     function MyController($scope, myService, _) {
         $scope.users = [];
-        $scope.sortBy = 'name';
+        $scope.sortBy = 'firstName';
         $scope.message = '';
 
-        myService.getUsers()
+        myService.getUsers($scope.sortBy)
             .then(function (response) {
                 $scope.users = response.data;
             })
@@ -24,6 +24,18 @@
         $scope.sortTableBy = function(predicate) {
             $scope.reverse = ($scope.sortBy === predicate) ? !$scope.reverse : false;
             $scope.sortBy = predicate;
+
+            if($scope.reverse) {
+              predicate = '-' + predicate;
+            }
+
+            myService.getUsers(predicate)
+                .then(function (response) {
+                    $scope.users = response.data;
+                })
+                .catch(function(err) {
+                    $scope.message = err.data;
+                });
         };
 
         $scope.deleteUser = function(id) {
