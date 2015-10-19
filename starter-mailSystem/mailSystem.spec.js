@@ -65,7 +65,7 @@ describe('module', function () {
         var transfer = backend.transfer;
         expect(transfer).to.have.been.called;
         var filteredMails = transfer.args[0][0][0];
-        console.log();
+        //console.log();
         expect(filteredMails).to.include.keys(['to', 'id', 'body']);
 
     });

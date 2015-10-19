@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Setup</title>
+
+
+    <style>
+        /* dit zorgt ervoor dat bv {{quantity}} niet zichtbaar is in het begin tot angular is ingeladen.. anders krijg je zo een flash van die {{quantity}} te zien */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+
+        .myStyle {
+            background-color: green;
+            font-size: 8px;
+        }
+
+        .myOtherStyle {
+            background-color: blue;
+            color: white;
+        }
+
+        .sortorder:after {
+            content: '\25bc';
+        }
+        .sortorder.reverse:after {
+            content: '\25b2';
+        }
+
+    </style>
+
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+
+</head>
+<body ng-app="myApp" ng-cloak>
+
+<div ng-controller="MyController">
+
+    <table class="table table-striped" style="width:100%">
+        <tr>
+            <th><a href="" ng-click="sortTableBy('name')" >Name <span class="sortorder" ng-show="sortBy === 'name'" ng-class="{reverse:reverse}"></span></a></th>
+            <th><a href=""  ng-click="sortTableBy('email')" >Email <span class="sortorder" ng-show="sortBy === 'email'" ng-class="{reverse:reverse}"></span></a></th>
+            <th><a href=""  ng-click="sortTableBy('address')" >Address <span class="sortorder" ng-show="sortBy === 'address'" ng-class="{reverse:reverse}"></span></a></th>
+            <th><a href=""  ng-click="sortTableBy('zip')" >Zip <span class="sortorder" ng-show="sortBy === 'zip'" ng-class="{reverse:reverse}"></span></a></th>
+            <th><a href=""  ng-click="sortTableBy('city')" >City <span class="sortorder" ng-show="sortBy === 'city'" ng-class="{reverse:reverse}"></span></a></th>
+            <th>Delete?</th>
+        </tr>
+        <tr ng-repeat="user in users | orderBy:sortBy:reverse">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.zip }}</td>
+            <td>{{ user.city }}</td>
+            <td><a href="" ng-click="deleteUser(user.id)">Delete</a></td>
+        </tr>
+    </table>
+
+<span>{{ message }}</span>
+
+</div>
+
+
+
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers.js"></script>
+<script src="scripts/services.js"></script>
+
+</body>
+</html>

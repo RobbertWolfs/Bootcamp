@@ -38,7 +38,6 @@ mailSystem.transferEuriMails = function(backend) {
         return (s.include(mail.to, 'euri.com'));
     });
 
-
     // transfer to backend
     backend.transfer(filteredMails);
 };
