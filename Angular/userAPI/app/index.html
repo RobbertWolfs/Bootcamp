@@ -45,7 +45,7 @@
             <th><a href=""  ng-click="sortTableBy('address')" >Address <span class="sortorder" ng-show="sortBy === 'address'" ng-class="{reverse:reverse}"></span></a></th>
             <th><a href=""  ng-click="sortTableBy('zip')" >Zip <span class="sortorder" ng-show="sortBy === 'zip'" ng-class="{reverse:reverse}"></span></a></th>
             <th><a href=""  ng-click="sortTableBy('city')" >City <span class="sortorder" ng-show="sortBy === 'city'" ng-class="{reverse:reverse}"></span></a></th>
-            <th>Delete?</th>
+            <th></th>
         </tr>
         <tr ng-repeat="user in users | orderBy:sortBy:reverse">
             <td>{{ user.name }}</td>
@@ -53,15 +53,13 @@
             <td>{{ user.address }}</td>
             <td>{{ user.zip }}</td>
             <td>{{ user.city }}</td>
-            <td><a href="" ng-click="deleteUser(user.id)">Delete</a></td>
+            <td> <button type="button" class="btn btn-danger" ng-click="deleteUser(user.id)">Delete</button> </td>
         </tr>
     </table>
 
 <span>{{ message }}</span>
 
 </div>
-
-
 
 
 <script src="bower_components/angular/angular.js"></script>

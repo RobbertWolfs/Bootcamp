@@ -7,7 +7,7 @@
         .controller('MyController', MyController);
 
 
-    function MyController($scope, myService) {
+    function MyController($scope, myService, _) {
         $scope.users = [];
         $scope.sortBy = 'name';
         $scope.message = '';
