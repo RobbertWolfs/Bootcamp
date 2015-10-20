@@ -4,7 +4,7 @@
 
     angular.module('myApp')
 
-        .factory('httpLogInterceptor', function($q, $log) {
+        .factory('httpLogInterceptor', function($q) {
             return {
                 request : function (request) {
                     console.log('test', request.url);

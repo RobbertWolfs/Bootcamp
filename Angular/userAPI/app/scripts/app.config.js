@@ -14,6 +14,7 @@
         .config(function ($httpProvider) {
             $httpProvider.interceptors.push('httpLogInterceptor');
             $httpProvider.interceptors.push('httpAuthenticateInterceptor');
+            $httpProvider.interceptors.push('httpErrorInterceptor');
         })
 
     ;

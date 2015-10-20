@@ -9,6 +9,7 @@
             'ngResource',
 
             // third party
+            'toaster',
 
             // custom
             'userController',

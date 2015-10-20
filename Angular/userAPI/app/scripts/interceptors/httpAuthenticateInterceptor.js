@@ -5,7 +5,7 @@
     angular.module('myApp')
 
 
-        .factory('httpAuthenticateInterceptor', function($q, $log) {
+        .factory('httpAuthenticateInterceptor', function($q) {
             return {
                 request : function (request) {
                     request.headers.authorization = 'Robbert Wolfs';

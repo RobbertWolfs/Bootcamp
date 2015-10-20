@@ -33,11 +33,12 @@
 
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css"/>
 
 </head>
 <body ng-app="myApp" ng-cloak>
 
-
+<toaster-container></toaster-container>
 
 
 <div ng-controller="CountdownController as vm">
@@ -103,6 +104,8 @@
 
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/AngularJS-Toaster/toaster.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
 <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
@@ -112,6 +115,7 @@
 <script src="scripts/providers/services.js"></script>
 <script src="scripts/interceptors/httpAuthenticateInterceptor.js"></script>
 <script src="scripts/interceptors/httpLogInterceptor.js"></script>
+<script src="scripts/interceptors/httpErrorInterceptor.js"></script>
 <script src="scripts/controllers/alertController.js"></script>
 <script src="scripts/controllers/countdownController.js"></script>
 
