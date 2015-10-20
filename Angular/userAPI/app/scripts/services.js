@@ -1,30 +1,86 @@
-// SERVICE VERSIE
+// PROVIDER VERSIE
 (function () {
+
+    'use strict';
 
     angular
         .module('myApp')
-        .service('userService', userService);
+        .provider('userService', userServiceProvider);
 
-    function userService($http, config) {
+    function userServiceProvider() {
+        var baseUrl;
+        var defaultPageSize;
 
-        this.getUsers = function (page, sort) {
-            return $http.get(config.baseUrl + 'users?pageSize=' + config.pageSize + '&page=' + page + '&sort=' + sort)
-                .then(function (response) { // zo kan je enkel de users terug geven en niet het volledige http response
-                    var users = response.data;
-                    if (users.length < 50) users.lastPage = true;
-                    return users;
-                });
+        // dit is geschreven zoals een service
+        this.setBasePath = function(basePath) {
+            baseUrl = basePath;
         };
 
-        this.deleteUser = function (user) { // het is beter om de volledige user binnen te krijgen dan enkel de id
-            return $http.delete(config.baseUrl + 'users/' + user.id)
-                .then(function (response) { // zo kan je enkel de users terug geven en niet het volledige http response
-                    var deletedUser = response.data;
-                    return deletedUser;
-                });
-        }
+        this.setPageSize = function(pageSize) {
+            defaultPageSize = pageSize;
+        };
+
+       this.$get = function($http, $resource) {
+            // dit is geschreven zoals een factory
+            function getUsers(page, sort) {
+                return $http.get(baseUrl + 'users?pageSize=' + defaultPageSize + '&page=' + page + '&sort=' + sort)
+                    .then(function (response) { // zo kan je enkel de users terug geven en niet het volledige http response
+                        var users = response.data;
+                        if (users.length < 50) users.lastPage = true;
+                        return users;
+                    });
+            }
+
+            function deleteUser(user) { // het is beter om de volledige user binnen te krijgen dan enkel de id
+                return $http.delete(baseUrl + 'users/' + user.id)
+                    .then(function (response) { // zo kan je enkel de users terug geven en niet het volledige http response
+                        var deletedUser = response.data;
+                        return deletedUser;
+                    });
+            }
+
+            return {
+                deleteUser : deleteUser,
+                getUsers : getUsers
+            }
+        };
     }
+
 })();
+
+
+
+
+
+
+
+//// SERVICE VERSIE
+//(function () {
+//
+//    angular
+//        .module('myApp')
+//        .service('userService', userService);
+//
+//    function userService($http, config) {
+//
+//        this.getUsers = function (page, sort) {
+//            return $http.get(config.baseUrl + 'users?pageSize=' + config.defaultPageSize + '&page=' + page + '&sort=' + sort)
+//                .then(function (response) { // zo kan je enkel de users terug geven en niet het volledige http response
+//                    var users = response.data;
+//                    if (users.length < 50) users.lastPage = true;
+//                    return users;
+//                });
+//        };
+//
+//        this.deleteUser = function (user) { // het is beter om de volledige user binnen te krijgen dan enkel de id
+//            return $http.delete(config.baseUrl + 'users/' + user.id)
+//                .then(function (response) { // zo kan je enkel de users terug geven en niet het volledige http response
+//                    var deletedUser = response.data;
+//                    return deletedUser;
+//                });
+//        }
+//    }
+//})();
 
 
 
