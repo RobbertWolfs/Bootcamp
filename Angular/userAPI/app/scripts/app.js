@@ -12,7 +12,9 @@
 
             // custom
             'userController',
-            'alertController'
+            'alertController',
+            'countdownController'
+
         ]) // indien geen extra dependencies : lege [] is verplicht, anders loopt het mis
         // simple wrapper for underscore
         .factory('_', function($window) {

@@ -10,7 +10,6 @@
             // third party
             'ui.bootstrap'
 
-
             // custom
         ])
         .controller('AlertController', AlertController);
@@ -25,22 +24,17 @@
         /////////////
 
         function activate() {
-            vm.alerts = [
-                { type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.' },
-                { type: 'success', msg: 'Well done! You successfully read this important alert message.' }
-            ];
+            vm.showAlert = false;
+            vm.alertMessage = 'Whoop Whoop, this is me showing an alert';
+            vm.alertType = 'success';
         }
 
 
-        vm.addAlert = function() {
-            vm.alerts.push({
-                msg : 'Another Alert'
-            })
+        vm.toggleAlert = function() {
+           vm.showAlert = !vm.showAlert;
         };
 
-        vm.closeAlert = function(index) {
-          vm.alerts.splice(index, 1);
-        };
+
     }
 
 })();

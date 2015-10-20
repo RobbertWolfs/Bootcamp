@@ -38,16 +38,33 @@
 <body ng-app="myApp" ng-cloak>
 
 
-<div ng-controller="AlertController as vm">
-    <uib-alert ng-repeat="alert in vm.alerts" type="{{alert.type}}" close="vm.closeAlert($index)">{{alert.msg}}</uib-alert>
-    <button type="button" class='btn btn-default' ng-click="vm.addAlert()">Add Alert</button>
+
+
+<div ng-controller="CountdownController as vm">
+
+    <h2>Countdown</h2>
+
+    <span>{{vm.seconds}}</span>
+
 </div>
 
+<br/>
+<br/>
+
+<div ng-controller="AlertController as vm">
+
+    <h2>Alert</h2>
+
+    <button type="button" class='btn btn-default' ng-click="vm.toggleAlert()">Toggle Alert</button>
+    <uib-alert ng-if="alertMessage" type="{{alertType}}" close="vm.toggleAlert()">{{alertMessage}}</uib-alert>
+</div>
 
 <br/>
 <br/>
 
 <div ng-controller="UserListController as vm">
+
+    <h2>User List</h2>
 
     <div infinite-scroll="vm.loadMore()" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
 
@@ -91,6 +108,7 @@
 <script src="scripts/app.js"></script>
 <script src="scripts/userListController.js"></script>
 <script src="scripts/alertController.js"></script>
+<script src="scripts/countdownController.js"></script>
 <script src="scripts/services.js"></script>
 
 </body>
