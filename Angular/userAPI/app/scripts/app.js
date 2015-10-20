@@ -6,6 +6,7 @@
         .module('myApp', [
 
             //angular
+            'ngResource',
 
             // third party
 
@@ -13,7 +14,7 @@
             // custom
             'userController',
             'alertController',
-            'countdownController'
+            'countdownController',
 
         ]) // indien geen extra dependencies : lege [] is verplicht, anders loopt het mis
 
@@ -21,6 +22,10 @@
         .factory('_', function ($window) {
             return $window._; // assumes underscore has already been loaded on the page
         })
+
+        .factory('UserResource', function($resource) {
+            return $resource('/api/users/:id', { id : '@id' });
+        });
 
         //// some config settings wanneer je een service gebruikt
         //.constant('config', {

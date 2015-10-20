@@ -20,24 +20,43 @@
             defaultPageSize = pageSize;
         };
 
-       this.$get = function($http, $resource) {
-            // dit is geschreven zoals een factory
+       this.$get = function($http, UserResource) {
+
+           // dit is geschreven zoals een factory
             function getUsers(page, sort) {
-                return $http.get(baseUrl + 'users?pageSize=' + defaultPageSize + '&page=' + page + '&sort=' + sort)
-                    .then(function (response) { // zo kan je enkel de users terug geven en niet het volledige http response
-                        var users = response.data;
-                        if (users.length < 50) users.lastPage = true;
+
+
+                return UserResource.query().$promise
+                    .then(function(users) {
                         return users;
                     });
+
+
+                //return $http.get(baseUrl + 'users?pageSize=' + defaultPageSize + '&page=' + page + '&sort=' + sort)
+                //    .then(function (response) { // zo kan je enkel de users terug geven en niet het volledige http response
+                //        var users = response.data;
+                //        if (users.length < 50) users.lastPage = true;
+                //        return users;
+                //    });
             }
 
             function deleteUser(user) { // het is beter om de volledige user binnen te krijgen dan enkel de id
-                return $http.delete(baseUrl + 'users/' + user.id)
-                    .then(function (response) { // zo kan je enkel de users terug geven en niet het volledige http response
-                        var deletedUser = response.data;
-                        return deletedUser;
-                    });
+
+                return UserResource.remove(user).$promise;
+
+                //return $http.delete(baseUrl + 'users/' + user.id)
+                //    .then(function (response) { // zo kan je enkel de users terug geven en niet het volledige http response
+                //        var deletedUser = response.data;
+                //        return deletedUser;
+                //    });
             }
+
+           //
+           //function saveUser(user) {
+           //
+           //    return user.$save();
+           //
+           //}
 
             return {
                 deleteUser : deleteUser,

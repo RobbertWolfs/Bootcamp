@@ -41,8 +41,6 @@
                 });
         }
 
-
-
         vm.sortTableBy = function (columnToSort) {
             vm.reverse = (vm.sortBy === columnToSort) ? !vm.reverse : false;
             vm.sortBy = columnToSort;
@@ -63,7 +61,7 @@
         vm.deleteUser = function (user) {
             userService.deleteUser(user) // het is beter om de volledige user mee te geven dan enkel de id
                 .then(function (deletedUser) {
-                    vm.users = _.without(vm.users, _.findWhere(vm.users, deletedUser));
+                    vm.users = _.without(vm.users, _.findWhere(vm.users, user)); // we moeten user gebruiken ipv deletedUser
                 })
                 .catch(function (err) {
                     vm.errorMessage = err.data;
