@@ -31,7 +31,7 @@
         }
 
         function countDown() {
-            timer = $interval(updateCountDown, 1000)
+            timer = $interval(updateCountDown, 1000) // dit geeft funky errors bij custom filters , tenzij het als dependency wordt ingeladen de filter..
         }
 
         function updateCountDown() {

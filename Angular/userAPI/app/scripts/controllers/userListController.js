@@ -15,7 +15,7 @@
         .controller('UserListController', UserListController);
 
 
-    function UserListController(userService, _) {
+    function UserListController(userService, _, $filter) {
 
         var vm = this;
 
@@ -24,6 +24,7 @@
         vm.errorMessage = '';
         vm.busy = false;
         vm.page = 1;
+        vm.text = '<strong>Hello World</strong>';
 
         activate();
 
@@ -31,10 +32,12 @@
 
         function activate() {
 
+            var gmailFilter = $filter('gmail'); //dit zorgt voor betere performance dan dat je hem in je html filterd
 
             userService.getUsers(vm.page, vm.sortBy)
                 .then(function (users) {
-                    vm.users = users;
+                    var filteredUsers = gmailFilter(users);
+                    vm.users = filteredUsers;
                 })
                 .catch(function (err) {
                     vm.errorMessage = err.data;

@@ -7,6 +7,7 @@
 
             //angular
             'ngResource',
+            'ngSanitize',
 
             // third party
             'toaster',

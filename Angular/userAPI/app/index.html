@@ -66,6 +66,7 @@
 <div ng-controller="UserListController as vm">
 
     <h2>User List</h2>
+    <h2 ng-bind-html="vm.text"></h2> <!-- to inject dynamic html, but be carefull with this for cross site scripting!!! -->
 
     <div infinite-scroll="vm.loadMore()" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
 
@@ -85,8 +86,8 @@
                 <th></th>
             </tr>
             <tr ng-repeat="user in vm.users">
-                <td>{{ user.name }}</td>
-                <td>{{ user.email | makeUpperCase }}</td>
+                <td>{{ user.name | casser:fasle }}</td>
+                <td>{{ user.email | casser:true }}</td>
                 <td>{{ user.address }}</td>
                 <td>{{ user.zip }}</td>
                 <td>{{ user.city }}</td>
@@ -108,6 +109,7 @@
 <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
 <script src="scripts/app.js"></script>
 <script src="scripts/app.config.js"></script>
@@ -116,7 +118,8 @@
 <script src="scripts/interceptors/httpAuthenticateInterceptor.js"></script>
 <script src="scripts/interceptors/httpLogInterceptor.js"></script>
 <script src="scripts/interceptors/httpErrorInterceptor.js"></script>
-<script src="scripts/filters/upperCaseFilter.js"></script>
+<script src="scripts/filters/casserFilter.js"></script>
+<script src="scripts/filters/gmailFilter.js"></script>
 <script src="scripts/controllers/alertController.js"></script>
 <script src="scripts/controllers/countdownController.js"></script>
 
