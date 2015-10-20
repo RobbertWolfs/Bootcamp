@@ -86,7 +86,7 @@
             </tr>
             <tr ng-repeat="user in vm.users">
                 <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
+                <td>{{ user.email | makeUpperCase }}</td>
                 <td>{{ user.address }}</td>
                 <td>{{ user.zip }}</td>
                 <td>{{ user.city }}</td>
@@ -116,6 +116,7 @@
 <script src="scripts/interceptors/httpAuthenticateInterceptor.js"></script>
 <script src="scripts/interceptors/httpLogInterceptor.js"></script>
 <script src="scripts/interceptors/httpErrorInterceptor.js"></script>
+<script src="scripts/filters/upperCaseFilter.js"></script>
 <script src="scripts/controllers/alertController.js"></script>
 <script src="scripts/controllers/countdownController.js"></script>
 
