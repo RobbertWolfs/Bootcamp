@@ -10,11 +10,10 @@
 
             // third party
 
-
             // custom
             'userController',
             'alertController',
-            'countdownController',
+            'countdownController'
 
         ]) // indien geen extra dependencies : lege [] is verplicht, anders loopt het mis
 
@@ -25,7 +24,9 @@
 
         .factory('UserResource', function($resource) {
             return $resource('/api/users/:id', { id : '@id' });
-        });
+        })
+
+    ;
 
         //// some config settings wanneer je een service gebruikt
         //.constant('config', {
