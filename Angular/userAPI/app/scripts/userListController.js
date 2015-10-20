@@ -30,6 +30,8 @@
         /////////////
 
         function activate() {
+
+
             userService.getUsers(vm.page, vm.sortBy)
                 .then(function (users) {
                     vm.users = users;

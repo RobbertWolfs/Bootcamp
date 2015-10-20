@@ -15,7 +15,7 @@
         .controller('AlertController', AlertController);
 
 
-    function AlertController(_) {
+    function AlertController() {
 
         var vm = this;
 

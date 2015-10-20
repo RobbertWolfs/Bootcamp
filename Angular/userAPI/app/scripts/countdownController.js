@@ -14,7 +14,7 @@
         .controller('CountdownController', CountdownController);
 
 
-    function CountdownController(_, $interval, $window, $rootScope) {
+    function CountdownController($interval, $rootScope) {
 
         var vm = this;
         var timer = null;
