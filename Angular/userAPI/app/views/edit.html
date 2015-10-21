@@ -1,2 +1,51 @@
 <h1 ng-if="vm.userId">Edit user with id : {{ vm.userId }}</h1>
-<h1 ng-if="!vm.userId">Add user</h1>
+<h1 ng-if="!vm.userId">Add new user</h1>
+
+
+<span>{{ vm.message }}</span>
+
+<form name="myForm" novalidate ng-submit="vm.submit(myForm.$valid)">
+    <div class="form-group">
+        <input type="text" class="form-control" name="name" placeholder="name" ng-model="vm.user.name"
+               ng-minlength="10"
+               ng-maxlength="20"
+               required>
+
+
+        <div ng-messages="myForm.name.$error" style="color : red" ng-if='myForm.name.$touched || myForm.$submitted'>
+            <div ng-messages-include="views/error-messages.html"></div><!--de views/ moet ervoor staan anders vind hij de error-messages.html niet..-->
+
+            <!--<div ng-message="required">This field is required.</div>-->
+            <!--<div ng-message="minlength">This field is to short.</div>-->
+            <!--<div ng-message="maxlength">This field is to long.</div>-->
+        </div>
+
+    </div>
+
+    <div class="form-group">
+        <input type="email" class="form-control" name="email" placeholder="email" ng-model="vm.user.email"
+               required>
+
+
+        <div ng-messages="myForm.email.$error" style="color : red" ng-if='myForm.email.$touched || myForm.$submitted'>
+            <div ng-messages-include="views/error-messages.html"></div><!--de views/ moet ervoor staan anders vind hij de error-messages.html niet..-->
+        </div>
+
+    </div>
+    <div class="form-group">
+        <input type="number" class="form-control" name="age" placeholder="age" ng-model="vm.user.age"
+               ng-min="0" ng-max="99" required>
+
+        <div ng-messages="myForm.age.$error" style="color : red" ng-if='myForm.age.$touched || myForm.$submitted'>
+            <div ng-messages-include="views/error-messages.html"></div><!--de views/ moet ervoor staan anders vind hij de error-messages.html niet..-->
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+<br/>
+
+<pre>
+    {{ myForm | json }}
+</pre>

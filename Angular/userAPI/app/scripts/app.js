@@ -8,6 +8,7 @@
             //angular
             'ngResource',
             'ngSanitize',
+            'ngMessages',
 
             // third party
             'toaster',
@@ -27,7 +28,16 @@
         })
 
         .factory('UserResource', function($resource) {
-            return $resource('/api/users/:id', { id : '@id' });
+            var resource = $resource('/api/users/:id', { id : '@id' }, { update: { method: 'PUT'}});
+                //resource.prototype.$store = function() {
+                //    if (!this.id) {
+                //        return this.$save();
+                //    }
+                //    else {
+                //        return this.update();
+                //    }
+                //};
+            return resource;
         })
 
         .run(function($rootScope, $log) {

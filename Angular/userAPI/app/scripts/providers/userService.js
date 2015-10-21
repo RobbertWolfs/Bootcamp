@@ -20,7 +20,7 @@
             defaultPageSize = pageSize;
         };
 
-       this.$get = function($http, UserResource) {
+       this.$get = function($log, $http, UserResource) {
 
            // dit is geschreven zoals een factory
             function getUsers(page, sort) {
@@ -40,6 +40,16 @@
                 //    });
             }
 
+           function getUser(id) {
+
+               $log.info(id);
+
+               return UserResource.get({ id : id}).$promise
+                   .then(function(user) {
+                       return user;
+                   });
+           }
+
             function deleteUser(user) { // het is beter om de volledige user binnen te krijgen dan enkel de id
 
                 return UserResource.remove(user).$promise;
@@ -51,16 +61,25 @@
                 //    });
             }
 
-           //
-           //function saveUser(user) {
-           //
-           //    return user.$save();
-           //
-           //}
+
+           function saveUser(user) {
+
+
+               if (!user.id) {
+                   return UserResource.save(user).$promise;
+               }
+               else {
+                   return UserResource.update(user).$promise;
+               }
+
+           }
+
 
             return {
                 deleteUser : deleteUser,
-                getUsers : getUsers
+                getUsers : getUsers,
+                getUser : getUser,
+                saveUser : saveUser
             }
         };
     }
