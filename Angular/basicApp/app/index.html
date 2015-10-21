@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic App</title>
+
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+</head>
+<body ng-app="basicApp" ng-cloak>
+
+
+<div ng-controller="mainController as vm">
+    <h2>{{ vm.text }}</h2>
+
+
+    <button ng-click="vm.goToView2()">Go to View 2</button>
+</div>
+
+
+
+<!--Manier 1 voor views-->
+<!--<ng-include src="'views/view1.html'"></ng-include> &lt;!&ndash; moet als string geschreven worden. &ndash;&gt;-->
+
+<!--Manier 2 voor views-->
+<div ng-view=""></div> <!--Check app.config for routing-->
+
+
+<a href="#/">Home</a> <!-- het # is belangrijk..-->
+<a href="#/view1">View1</a> <!-- het # is belangrijk..-->
+<a href="#/view2">View2</a> <!-- het # is belangrijk..-->
+
+
+
+
+<!-- bower -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+
+<!-- app -->
+<script src="app.js"></script>
+<script src="config/app.config.js"></script>
+<script src="config/app.run.js"></script>
+
+<!-- controllers -->
+<script src="scripts/controllers/controllers.module.js"></script>
+<script src="scripts/controllers/mainController.js"></script>
+<script src="scripts/controllers/view1Controller.js"></script>
+<script src="scripts/controllers/view2Controller.js"></script>
+
+</body>
+</html>
