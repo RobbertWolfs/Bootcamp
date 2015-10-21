@@ -8,10 +8,10 @@
             //angular
             'ngResource',
             'ngSanitize',
-            'ngRoute',
 
             // third party
             'toaster',
+            'ui.router',
 
             // custom
             'userController',
@@ -28,6 +28,14 @@
 
         .factory('UserResource', function($resource) {
             return $resource('/api/users/:id', { id : '@id' });
+        })
+
+        .run(function($rootScope, $log) {
+
+            $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+               $log.info('state change error', error)
+            });
+
         })
 
     ;

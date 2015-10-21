@@ -9,7 +9,7 @@
         .controller('editUserController', editUserController);
 
 
-    function editUserController($log, $routeParams) {
+    function editUserController($log, $stateParams) {
 
         var vm = this;
         vm.userId = null;
@@ -20,7 +20,7 @@
 
         function activate() {
 
-            vm.userId = $routeParams.userId;
+            vm.userId = $stateParams.userId;
 
         }
     }

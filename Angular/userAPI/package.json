@@ -4,6 +4,7 @@
   "description": "",
   "main": "server/server.js",
   "dependencies": {
+    "angular-ui-router": "^0.2.15",
     "body-parser": "^1.14.1",
     "boom": "^2.9.0",
     "cors": "^2.7.1",

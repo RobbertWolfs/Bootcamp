@@ -22,13 +22,13 @@
                 <th></th>
             </tr>
             <tr ng-repeat="user in vm.users">
-                <td class="user" ng-click="vm.editUser(user)">{{ user.name | casser:fasle }}</td>
+                <td class="user" ui-sref="edit({userId : user.id})">{{ user.name | casser:fasle }}</td>
                 <td>{{ user.email | casser:true }}</td>
                 <td>{{ user.address }}</td>
                 <td>{{ user.zip }}</td>
                 <td>{{ user.city }}</td>
                 <td>
-                    <button type="button" class="btn btn-info" ng-click="vm.editUser(user)">Edit</button>
+                    <button type="button" class="btn btn-info" ui-sref="edit({userId : user.id})">Edit</button>
                     <button type="button" class="btn btn-danger" ng-click="vm.deleteUser(user)">Delete</button>
                 </td>
             </tr>
