@@ -8,6 +8,7 @@
         'ngRoute',
 
         //3rd party
+        'ui.router',
 
         //custom
         'app.controllers'

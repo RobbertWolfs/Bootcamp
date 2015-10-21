@@ -27,13 +27,22 @@
 <!--Manier 1 voor views-->
 <!--<ng-include src="'views/view1.html'"></ng-include> &lt;!&ndash; moet als string geschreven worden. &ndash;&gt;-->
 
-<!--Manier 2 voor views-->
-<div ng-view=""></div> <!--Check app.config for routing-->
+<!--Manier 2 voor views, dit maakt gebruikt van angular-route-->
+<!--<div ng-view=""></div> &lt;!&ndash;Check app.config for routing&ndash;&gt;-->
+
+<!--Manier 3  voor views, deze maakt gebruikt van de angular-ui-router-->
+<div ui-view></div>
 
 
-<a href="#/">Home</a> <!-- het # is belangrijk..-->
-<a href="#/view1">View1</a> <!-- het # is belangrijk..-->
-<a href="#/view2">View2</a> <!-- het # is belangrijk..-->
+<!--wordt gebruikt bij angular-route-->
+<!--<a href="#/">Home</a> &lt;!&ndash; het # is belangrijk..&ndash;&gt;-->
+<!--<a href="#/view1">View1</a> &lt;!&ndash; het # is belangrijk..&ndash;&gt;-->
+<!--<a href="#/view2">View2</a> &lt;!&ndash; het # is belangrijk..&ndash;&gt;-->
+
+<!--Word gebruikt bij angular-ui-route-->
+<a ui-sref="view1">View1</a>
+<a ui-sref="view2">View2</a>
+
 
 
 
@@ -41,6 +50,7 @@
 <!-- bower -->
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
 <!-- app -->
 <script src="app.js"></script>
