@@ -15,7 +15,7 @@
         .controller('UserListController', UserListController);
 
 
-    function UserListController(userService, _, $filter) {
+    function UserListController(userService, _, $filter, $location, users) {
 
         var vm = this;
 
@@ -25,6 +25,7 @@
         vm.busy = false;
         vm.page = 1;
         vm.text = '<strong>Hello World</strong>';
+        vm.editUser = editUser;
 
         activate();
 
@@ -34,14 +35,20 @@
 
             var gmailFilter = $filter('gmail'); //dit zorgt voor betere performance dan dat je hem in je html filterd
 
-            userService.getUsers(vm.page, vm.sortBy)
-                .then(function (users) {
-                    var filteredUsers = gmailFilter(users);
-                    vm.users = filteredUsers;
-                })
-                .catch(function (err) {
-                    vm.errorMessage = err.data;
-                });
+            vm.users = users; // de users komen van app.config in de resolve en krijg je hier binnen als param
+            // dit is niet meer nodig door het lijntje hierboven
+            //userService.getUsers(vm.page, vm.sortBy)
+            //    .then(function (users) {
+            //        var filteredUsers = gmailFilter(users);
+            //        vm.users = filteredUsers;
+            //    })
+            //    .catch(function (err) {
+            //        vm.errorMessage = err.data;
+            //    });
+        }
+
+        function editUser(user) {
+            $location.path('edit/' + user.id)
         }
 
         vm.sortTableBy = function (columnToSort) {

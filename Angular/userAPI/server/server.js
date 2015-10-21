@@ -9,6 +9,8 @@ var mongoose = require('mongoose');
 var cfg = require('./config');
 var User = require('./models/user');
 var dataGenerator = require('./config/dataGenerator');
+var path = require('path');
+
 
 // app setup
 var app = express();
@@ -37,6 +39,14 @@ app.use('/api/users', userApi);
 
 // middleware - error handlers
 app.use(globalErrorHandler());
+
+
+// dit is een callback voor alles dus moet helemaal onderaan anders geeft het errors..
+app.all('/*', function(req,res,next) { // dit is nodig voor de html5Mode te laten werken
+    res.sendFile(path.resolve('app/index.html'));
+});
+
+
 
 // listen for incomming request
 var server = app.listen(cfg.port, function(){

@@ -8,6 +8,7 @@
             //angular
             'ngResource',
             'ngSanitize',
+            'ngRoute',
 
             // third party
             'toaster',
@@ -15,7 +16,8 @@
             // custom
             'userController',
             'alertController',
-            'countdownController'
+            'countdownController',
+            'editUserController'
 
         ]) // indien geen extra dependencies : lege [] is verplicht, anders loopt het mis
 

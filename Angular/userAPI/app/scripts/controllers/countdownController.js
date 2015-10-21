@@ -14,7 +14,7 @@
         .controller('CountdownController', CountdownController);
 
 
-    function CountdownController($interval, $rootScope) {
+    function CountdownController($interval, $window) {
 
         var vm = this;
         var timer = null;
@@ -38,8 +38,8 @@
             vm.seconds--;
 
             if (vm.seconds == 0) {
-                //$window.alert('Done');
-                $rootScope.alertMessage = 'Countdown is done'; // zo geraken we aan de alertController, rootScope niet te veel gebruiken maar voor z'n zaken zou het eventueel nog mogen
+                $window.alert('Done');
+                //$rootScope.alertMessage = 'Countdown is done'; // zo geraken we aan de alertController, rootScope niet te veel gebruiken maar voor z'n zaken zou het eventueel nog mogen
                 $interval.cancel(timer);
                 timer = null;
             }

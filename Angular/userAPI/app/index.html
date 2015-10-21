@@ -1,4 +1,5 @@
 <!doctype html>
+<base href="/"> <!--Dit is nodig om de html5Mode te laten werken-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,6 +30,11 @@
             content: '\25b2';
         }
 
+
+        .user {
+            cursor: pointer;
+        }
+
     </style>
 
 
@@ -41,68 +47,17 @@
 <toaster-container></toaster-container>
 
 
-<div ng-controller="CountdownController as vm">
 
-    <h2>Countdown</h2>
-
-    <span>{{vm.seconds}}</span>
-
-</div>
-
-<br/>
-<br/>
-
-<div ng-controller="AlertController as vm">
-
-    <h2>Alert</h2>
-
-    <!--<button type="button" class='btn btn-default' ng-click="vm.toggleAlert()">Toggle Alert</button>-->
-    <uib-alert ng-if="alertMessage" type="{{alertType}}" close="vm.toggleAlert()">{{alertMessage}}</uib-alert>
-</div>
-
-<br/>
-<br/>
-
-<div ng-controller="UserListController as vm">
-
-    <h2>User List</h2>
-    <h2 ng-bind-html="vm.text"></h2> <!-- to inject dynamic html, but be carefull with this for cross site scripting!!! -->
-
-    <div infinite-scroll="vm.loadMore()" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
-
-        <table class="table table-striped" style="width:100%">
-            <tr>
-                <th>Name <span class="sortorder" ng-show="vm.sortBy === 'name'" ng-class="{reverse:reverse}"></span>
-                </th>
-                <th><a href="" ng-click="vm.sortTableBy('email')">Email <span class="sortorder"
-                                                                              ng-show="vm.sortBy === 'email'"
-                                                                              ng-class="{reverse:reverse}"></span></a>
-                </th>
-                <th>Address <span class="sortorder" ng-show="vm.sortBy === 'address'"
-                                  ng-class="{reverse:reverse}"></span></th>
-                <th>Zip <span class="sortorder" ng-show="vm.sortBy === 'zip'" ng-class="{reverse:reverse}"></span></th>
-                <th>City <span class="sortorder" ng-show="vm.sortBy === 'city'" ng-class="{reverse:reverse}"></span>
-                </th>
-                <th></th>
-            </tr>
-            <tr ng-repeat="user in vm.users">
-                <td>{{ user.name | casser:fasle }}</td>
-                <td>{{ user.email | casser:true }}</td>
-                <td>{{ user.address }}</td>
-                <td>{{ user.zip }}</td>
-                <td>{{ user.city }}</td>
-                <td>
-                    <button type="button" class="btn btn-danger" ng-click="vm.deleteUser(user)">Delete</button>
-                </td>
-            </tr>
-        </table>
-    </div>
+<ng-include src="'views/menu.html'"></ng-include>
 
 
-    <span>{{ vm.errorMessage }}</span>
-</div>
+
+<div ng-view=""></div>
 
 
+
+
+<!--Bower-->
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
@@ -111,17 +66,29 @@
 <script src="bower_components/underscore/underscore.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+
+<!--App-->
 <script src="scripts/app.js"></script>
 <script src="scripts/app.config.js"></script>
+
+<!--Controllers-->
+<script src="scripts/controllers/alertController.js"></script>
 <script src="scripts/controllers/userListController.js"></script>
-<script src="scripts/providers/services.js"></script>
+<script src="scripts/controllers/editUserController.js"></script>
+<script src="scripts/controllers/countdownController.js"></script>
+
+<!--Providers-->
+<script src="scripts/providers/userService.js"></script>
+
+<!--Interceptors-->
 <script src="scripts/interceptors/httpAuthenticateInterceptor.js"></script>
 <script src="scripts/interceptors/httpLogInterceptor.js"></script>
 <script src="scripts/interceptors/httpErrorInterceptor.js"></script>
+
+<!--Filters-->
 <script src="scripts/filters/casserFilter.js"></script>
 <script src="scripts/filters/gmailFilter.js"></script>
-<script src="scripts/controllers/alertController.js"></script>
-<script src="scripts/controllers/countdownController.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,40 @@
+
+<div>
+
+    <h2>User List</h2>
+    <h2 ng-bind-html="vm.text"></h2> <!-- to inject dynamic html, but be carefull with this for cross site scripting!!! -->
+
+    <div infinite-scroll="vm.loadMore()" infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1'>
+
+        <table class="table table-striped" style="width:100%">
+            <tr>
+                <th>Name <span class="sortorder" ng-show="vm.sortBy === 'name'" ng-class="{reverse:reverse}"></span>
+                </th>
+                <th><a href="" ng-click="vm.sortTableBy('email')">Email <span class="sortorder"
+                                                                              ng-show="vm.sortBy === 'email'"
+                                                                              ng-class="{reverse:reverse}"></span></a>
+                </th>
+                <th>Address <span class="sortorder" ng-show="vm.sortBy === 'address'"
+                                  ng-class="{reverse:reverse}"></span></th>
+                <th>Zip <span class="sortorder" ng-show="vm.sortBy === 'zip'" ng-class="{reverse:reverse}"></span></th>
+                <th>City <span class="sortorder" ng-show="vm.sortBy === 'city'" ng-class="{reverse:reverse}"></span>
+                </th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="user in vm.users">
+                <td class="user" ng-click="vm.editUser(user)">{{ user.name | casser:fasle }}</td>
+                <td>{{ user.email | casser:true }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.zip }}</td>
+                <td>{{ user.city }}</td>
+                <td>
+                    <button type="button" class="btn btn-info" ng-click="vm.editUser(user)">Edit</button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteUser(user)">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <span>{{ vm.errorMessage }}</span>
+</div>

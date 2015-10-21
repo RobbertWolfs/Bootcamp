@@ -22,6 +22,7 @@
     "underscore": "~1.8.3",
     "ngInfiniteScroll": "~1.2.1",
     "AngularJS-Toaster": "angularjs-toaster#~0.4.15",
-    "angular-sanitize": "~1.4.7"
+    "angular-sanitize": "~1.4.7",
+    "angular-route": "~1.4.7"
   }
 }

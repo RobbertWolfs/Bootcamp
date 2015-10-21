@@ -1,0 +1,9 @@
+
+<div>
+
+<h2>Alert</h2>
+
+<button type="button" class='btn btn-default' ng-click="vm.toggleAlert()">Toggle Alert</button>
+<uib-alert ng-if="vm.showAlert" type="{{vm.alertType}}" close="vm.toggleAlert()">{{vm.alertMessage}}</uib-alert>
+</div>
+
