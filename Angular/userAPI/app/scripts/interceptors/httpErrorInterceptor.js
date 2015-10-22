@@ -4,7 +4,7 @@
     'use strict';
 
     angular.module('myApp')
-        .factory('httpErrorInterceptor', function($q, toaster) {
+        .factory('httpErrorInterceptor', ['$q', 'toaster', function($q, toaster) {
             return {
                 request : function(request) {
                     return request;
@@ -15,6 +15,6 @@
                     return $q.reject(response);
                 }
             }
-        });
+        }]);
 
 })();

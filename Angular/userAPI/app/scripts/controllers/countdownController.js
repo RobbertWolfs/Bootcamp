@@ -14,6 +14,7 @@
         .controller('CountdownController', CountdownController);
 
 
+    CountdownController.$inject = ['$interval', '$window'];
     function CountdownController($interval, $window) {
 
         var vm = this;

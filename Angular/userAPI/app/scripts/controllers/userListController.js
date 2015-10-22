@@ -15,6 +15,7 @@
         .controller('UserListController', UserListController);
 
 
+    UserListController.$inject = ['userService', '_', '$filter', '$location', 'users'];
     function UserListController(userService, _, $filter, $location, users) {
 
         var vm = this;

@@ -7,6 +7,7 @@
         .controller('editUserController', editUserController);
 
 
+    editUserController.$inject = ['$log', '$stateParams', '$scope', 'userService'];
     function editUserController($log, $stateParams, $scope, userService) {
 
         var vm = this;

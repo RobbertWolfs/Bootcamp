@@ -6,19 +6,19 @@
         .module('myApp') // indien geen extra dependencies : lege [] is verplicht, anders loopt het mis
 
         // wanneer je een provider gebruikt
-        .config(function (userServiceProvider) {
+        .config(['userServiceProvider', function (userServiceProvider) {
             userServiceProvider.setBasePath('/api/');
             userServiceProvider.setPageSize(20);
-        })
+        }])
 
-        .config(function ($httpProvider) {
+        .config(['$httpProvider', function ($httpProvider) {
             $httpProvider.interceptors.push('httpLogInterceptor');
             $httpProvider.interceptors.push('httpAuthenticateInterceptor');
             $httpProvider.interceptors.push('httpErrorInterceptor');
-        })
+        }])
 
         //Routes
-        .config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
+        .config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function ($stateProvider, $locationProvider, $urlRouterProvider) {
             $stateProvider
                 .state('edit', {
                     url: "/edit/:userId",
@@ -38,9 +38,9 @@
                     controller: 'UserListController',
                     controllerAs: 'vm',
                     resolve: { // dit is voor de route change gebeurt
-                        users: function (userService) { // nu kan je users gebruiken in de usersListController ipv van dat je daar de user gaat ophalen
+                        users: ['userService',function (userService) { // nu kan je users gebruiken in de usersListController ipv van dat je daar de user gaat ophalen
                             return userService.getUsers();
-                        }
+                        }]
                     }
                 })
                 .state('countdown', {
@@ -59,7 +59,7 @@
             $urlRouterProvider.otherwise("/users");
 
             $locationProvider.html5Mode(true); // Dit is handig zodat we de # in de url kunnen weglaten, maar moet je ook je server aanpassen om dit te laten werken (dit is wel tricky), check server.js
-        })
+        }])
 
     ;
 

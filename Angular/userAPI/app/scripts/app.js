@@ -23,11 +23,11 @@
         ]) // indien geen extra dependencies : lege [] is verplicht, anders loopt het mis
 
         // simple wrapper for underscore
-        .factory('_', function ($window) {
+        .factory('_', ['$window', function ($window) {
             return $window._; // assumes underscore has already been loaded on the page
-        })
+        }])
 
-        .factory('UserResource', function($resource) {
+        .factory('UserResource', ['$resource', function($resource) {
             var resource = $resource('/api/users/:id', { id : '@id' }, { update: { method: 'PUT'}});
                 //resource.prototype.$store = function() {
                 //    if (!this.id) {
@@ -38,15 +38,15 @@
                 //    }
                 //};
             return resource;
-        })
+        }])
 
-        .run(function($rootScope, $log) {
+        .run(['$rootScope', '$log', function($rootScope, $log) {
 
             $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
                $log.info('state change error', error)
             });
 
-        })
+        }])
 
     ;
 

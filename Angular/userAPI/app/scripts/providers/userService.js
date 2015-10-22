@@ -20,11 +20,10 @@
             defaultPageSize = pageSize;
         };
 
-       this.$get = function($log, $http, UserResource) {
+       this.$get = ['$log', 'UserResource', function($log, UserResource) {
 
            // dit is geschreven zoals een factory
-            function getUsers(page, sort) {
-
+            function getUsers() {
 
                 return UserResource.query().$promise
                     .then(function(users) {
@@ -81,7 +80,7 @@
                 getUser : getUser,
                 saveUser : saveUser
             }
-        };
+        }];
     }
 
 })();
