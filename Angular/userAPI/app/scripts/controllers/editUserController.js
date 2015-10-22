@@ -20,9 +20,9 @@
 
         function activate() {
 
-            var userId = $stateParams.userId;
+            vm.userId = $stateParams.userId;
 
-            if(userId) {
+            if(vm.userId) {
                 userService.getUser(vm.userId)
                     .then(function (user) {
 
@@ -49,8 +49,8 @@
             userService.saveUser(vm.user)
                 .then(function () {
 
-
                     vm.message = 'Succesfully added to the DB ';
+
                     $scope.myForm.submitting = false;
                     vm.user = angular.copy(vm.master);
                     $scope.myForm.$setPristine();
