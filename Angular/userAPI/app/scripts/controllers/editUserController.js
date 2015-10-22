@@ -37,6 +37,15 @@
             }
 
 
+            $scope.$watch('vm.user.name', function(newValue, oldValue) {
+                if(newValue === oldValue || oldValue) {
+                    return; // anders krijg je undefined gelogd
+                }
+
+               $log.info('User has changed his name', newValue, oldValue);
+            });
+
+
         }
 
         function submit(valid) {
@@ -65,6 +74,10 @@
 
 
         }
+
+
+
+
     }
 
 })();
