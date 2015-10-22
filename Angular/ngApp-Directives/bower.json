@@ -1,0 +1,23 @@
+{
+  "name": "ngApp",
+  "version": "0.0.0",
+  "homepage": "https://github.com/RobbertWolfs/Bootcamp",
+  "authors": [
+    "Robbert Wolfs <robbertwolfs@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "bootstrap": "~3.3.5"
+  }
+}

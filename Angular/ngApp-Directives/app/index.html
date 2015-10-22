@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+</head>
+<body ng-app="ngApp" ng-strict-di ng-cloak>
+
+
+
+<div ng-controller="myController as vm">
+    <h1>{{ vm.message }}</h1>
+</div>
+
+
+
+<!--Manier 1 : E(lement) -->
+<my-directive>My directive</my-directive> <!--De content hiertussen wordt via ng-transclude overgenomen-->
+<!--Manier 2 : A(ttribute) -->
+<button my-directive>My button</button>
+<br/>
+
+<!--<button my-attr="Test" my-directive></button>-->
+
+<br/>
+<br/>
+<br/>
+<my-button my-href="http://google.com" my-text="Ik ben een link"></my-button>
+<br/>
+<my-button my-text="Ik ben een button"></my-button>
+
+
+
+
+
+<!--JS INCLUDES-->
+<!--Bower-->
+<script src="bower_components/angular/angular.js"></script>
+
+<!--App-->
+<script src="scripts/app.js"></script>
+
+<!--Controllers-->
+<script src="scripts/controllers/myController.js"></script>
+
+<!--Directives-->
+<script src="scripts/directives/myDirective.js"></script>
+<script src="scripts/directives/myButton.js"></script>
+<!--END JS INCLUDES-->
+
+</body>
+</html>
