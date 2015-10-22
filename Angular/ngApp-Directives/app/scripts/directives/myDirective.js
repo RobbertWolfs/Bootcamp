@@ -20,13 +20,14 @@
             //
             //        return '<button>...</button>';
             //},
-            //controller: 'MyDirectiveController',
-            //controllerAs: 'vm',
+            controller: 'MyDirectiveController',
+            controllerAs: 'vm',
+            scope : {
+                text : '@',
+                click : '&'
+            }
 
-            link : function(scope, elements, attrs) { // geen dependency injection...
-                element.text('hello');
-            },
-            transclude : true // De content van het element wordt via ng-transclude overgenomen en in de template gestoken
+            //transclude : true // De content van het element wordt via ng-transclude overgenomen en in de template gestoken
             //replace : true // dit verwijderd de elementen of divs met attributen in html door de template, wordt vooral gebruikt bij elementen en niet bij attributen
         }
 
@@ -37,8 +38,9 @@
     function MyDirectiveController($scope, $element, $attrs, $log) {
 
         var vm = this;
+        vm.doThis = doThis;
 
-        vm.message = attrs.text;
+        //vm.message = attrs.text;
 
 
         activate();
@@ -47,11 +49,18 @@
         ///////
 
 
+        function doThis() {
+            $scope.click();
+        }
+
         function activate() {
 
-            $log.info($element);
-            $log.info($attrs);
-            $log.info($attrs.myAttr);
+            //$log.info($element);
+            //$log.info($attrs);
+            //$log.info($attrs.myAttr);
+
+            $log.info($scope.text);
+
 
         }
 

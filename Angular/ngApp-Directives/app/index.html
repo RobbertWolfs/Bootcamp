@@ -17,25 +17,42 @@
 
 
 <div ng-controller="myController as vm">
-    <h1>{{ vm.message }}</h1>
+    <!--<h1>{{ vm.message }}</h1>-->
+    <!--<my-directive text="testing" click="vm.doThat()"></my-directive>-->
+
+
+
+    <h2>Tabs</h2>
+
+    <tabs>
+
+        <tab-pane title="tab1" >
+            this is the content of tab 1
+        </tab-pane>
+        <tab-pane title="tab2">
+            this is the content of tab 2
+        </tab-pane>
+
+    </tabs>
+
+
 </div>
 
 
-
 <!--Manier 1 : E(lement) -->
-<my-directive>My directive</my-directive> <!--De content hiertussen wordt via ng-transclude overgenomen-->
+<!--<my-directive>My directive</my-directive> &lt;!&ndash;De content hiertussen wordt via ng-transclude overgenomen&ndash;&gt;-->
 <!--Manier 2 : A(ttribute) -->
-<button my-directive>My button</button>
-<br/>
+<!--&lt;!&ndash;<my-directive text="testing" click="vm.doThat()"></my-directive>&ndash;&gt;-->
+<!--<br/>-->
 
-<!--<button my-attr="Test" my-directive></button>-->
+<!--&lt;!&ndash;<button my-attr="Test" my-directive></button>&ndash;&gt;-->
 
-<br/>
-<br/>
-<br/>
-<my-button my-href="http://google.com" my-text="Ik ben een link"></my-button>
-<br/>
-<my-button my-text="Ik ben een button"></my-button>
+<!--<br/>-->
+<!--<br/>-->
+<!--<br/>-->
+<!--<my-button my-href="http://google.com" my-text="Ik ben een link"></my-button>-->
+<!--<br/>-->
+<!--<my-button my-text="Ik ben een button"></my-button>-->
 
 
 
@@ -54,6 +71,8 @@
 <!--Directives-->
 <script src="scripts/directives/myDirective.js"></script>
 <script src="scripts/directives/myButton.js"></script>
+<script src="scripts/directives/tabsDirective.js"></script>
+<script src="scripts/directives/tabDirective.js"></script>
 <!--END JS INCLUDES-->
 
 </body>
