@@ -12,7 +12,7 @@ var EmployeeContainer = React.createClass({
                 <h1>{this.state.company}</h1>
                 <AddEmployee newEmployee={this.state.newEmployee}
                              onChange={this._handleChange}
-                             onSave={this._addNewEmployee} />
+                             onSave={this._addNewEmployee}/>
                 <EmployeeList employees={this.state.employees}/>
             </div>
         )
@@ -51,6 +51,11 @@ var EmployeeList = React.createClass({
 });
 
 var AddEmployee = React.createClass({
+    propTypes: {
+        newEmployee: React.PropTypes.string.isRequired,
+        onChange: React.PropTypes.func.isRequired,
+        onSave: React.PropTypes.func.isRequired
+    },
     render: function () {
         return (
             <div>

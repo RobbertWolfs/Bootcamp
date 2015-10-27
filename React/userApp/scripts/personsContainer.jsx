@@ -5,19 +5,19 @@ var PersonsContainer = React.createClass({
             users: [
                 {
                     id: 1,
-                    name: "Frederik",
+                    name: 'Robbert Wolfs',
                     email: "frederik.bouillon@euri.com",
-                    age: 28,
+                    age: 22,
                     birthday: "16/04/1987",
                     married: false
                 },
                 {
                     id: 2,
-                    name: "Peter",
+                    name: 'Peter Cosemans',
                     email: "peter.cosemans@euri.com",
                     age: 51,
                     birthday: "06/10/1964",
-                    married: true
+                    married: false
                 }
             ],
             newUser: this._generateEmptyUser()
@@ -38,9 +38,9 @@ var PersonsContainer = React.createClass({
             id: null,
             name: '',
             email: '',
-            age: null,
+            age: 0,
             birthday: '',
-            married: null
+            married: false
         }
     },
 
@@ -53,6 +53,12 @@ var PersonsContainer = React.createClass({
         if (e.target.type == 'checkbox') {
             user[e.target.name] = e.target.checked;
         }
+
+        if (e.target.type == 'number' && e.target.value) {
+            user[e.target.name] = parseInt(e.target.value);
+        }
+
+
 
         this.setState({newUser: user});
 
@@ -83,23 +89,33 @@ var PersonsContainer = React.createClass({
 
 
 var PersonsTable = React.createClass({
+    propTypes: {
+        users: React.PropTypes.arrayOf(React.PropTypes.shape({
+            id: React.PropTypes.number,
+            name: React.PropTypes.string.isRequired,
+            email: React.PropTypes.string.isRequired,
+            age: React.PropTypes.number.isRequired,
+            birthday: React.PropTypes.string.isRequired,
+            married: React.PropTypes.bool.isRequired
+        }))
+    },
     render: function () {
         return (
-                <table className="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Age</th>
-                        <th>Birthday</th>
-                        <th>Married</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this._renderPersons()}
-                    </tbody>
-                </table>
+            <table className="table table-striped">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Birthday</th>
+                    <th>Married</th>
+                </tr>
+                </thead>
+                <tbody>
+                {this._renderPersons()}
+                </tbody>
+            </table>
         )
     },
 
@@ -134,6 +150,18 @@ var PersonsTable = React.createClass({
 
 
 var AddNewPerson = React.createClass({
+    propTypes: {
+        onChange : React.PropTypes.func.isRequired,
+        onSave : React.PropTypes.func.isRequired,
+        newUser : React.PropTypes.shape({
+            id: React.PropTypes.number,
+            name: React.PropTypes.string.isRequired,
+            email: React.PropTypes.string.isRequired,
+            age: React.PropTypes.number.isRequired,
+            birthday: React.PropTypes.string.isRequired,
+            married: React.PropTypes.bool.isRequired
+        })
+    },
     render: function () {
         return (
             <div>
@@ -160,7 +188,8 @@ var AddNewPerson = React.createClass({
                     </div>
                     <div className="form-group">
                         <label htmlFor="exampleInputMarried">Married</label>
-                        <input type="checkbox" checked={this.props.newUser.married} className='form-control' name="married"
+                        <input type="checkbox" checked={this.props.newUser.married} className='form-control'
+                               name="married"
                                value={this.props.newUser.married}
                                onChange={this.props.onChange}/>
                     </div>
