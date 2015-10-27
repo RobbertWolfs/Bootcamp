@@ -121,7 +121,35 @@ var PersonsContainer = React.createClass({
                 newUser: this._generateEmptyUser()
             });
         }
+    },
+
+
+    componentWillMount: function() {
+        console.log('componentWillMount');
+    },
+
+    componentDidMount: function() { // is een handige voor data op te halen
+        console.log('componentDidMount');
+    },
+
+    shouldComponentUpdate: function() {
+        console.log('shouldComponentUpdate');
+        return true; // hier ga je niet gewoon true of false doen maar eerder een test zoals nextProps.id !== this.props.id
+    },
+
+    componentWillUpdate: function() {
+        console.log('componentWillUpdate');
+    },
+
+    componentDidUpdate: function() {
+        console.log('componentDidUpdate');
+    },
+
+    componentWillUnmount: function() { // zou bv triggeren wanneer je naar een andere route zou gaan, zo kan je zaken destroyeen en cleanen
+        console.log('componentWillUnmount');
     }
+
+
 });
 
 
@@ -249,7 +277,12 @@ var AddNewPerson = React.createClass({
 
     _addStyleOnError: function(elem) {
         return elem ? 'has-error form-group' : 'form-group';
+    },
+
+    componentWillReceiveProps: function() {
+        console.log('componentWillReceiveProps');
     }
+
 });
 
 ReactDOM.render(<PersonsContainer />, document.getElementById('app'));
