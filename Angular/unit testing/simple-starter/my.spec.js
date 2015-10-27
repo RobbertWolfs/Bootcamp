@@ -30,7 +30,7 @@ describe('module to test', function() {
 });
 
 
-describe('module to test', function() {
+describe('controller', function() {
 
     beforeEach(module('myApp'));
 
@@ -127,4 +127,101 @@ describe('service', function() { // describe.only zorgt ervoor dat enkel dit wor
         $httpBackend.verifyNoOutstandingRequest();
 
     });
+});
+
+
+describe('directive ehSimple', function() {
+
+    beforeEach(module('myApp'));
+
+    var element, $scope;
+    beforeEach(inject(function($compile, $rootScope) {
+        $scope = $rootScope.$new();
+        $scope.message = 'Hello';
+        element = angular.element('<div eh-simple>{{ message }}</div>');
+        $compile(element)($scope); // belangrijke lijn
+        $rootScope.$digest(); // belangrijke lijn
+    }));
+
+    it('should equal "hello"', function() {
+        console.log('element simple', element.prop('outerHTML'))
+        expect(element.html()).to.equal('Hello');
+    });
+
+    it('should add a class of plain"', function() {
+        expect(element.hasClass('plain')).to.equal(true);
+    })
+});
+
+
+
+describe('directive ehTempl', function() {
+
+    beforeEach(module('myApp'));
+    beforeEach(module('ehTempl.tpl.html')); // deze module heeft dezelfde naam als de template
+
+    var element, $scope;
+    beforeEach(inject(function($compile, $rootScope) {
+        $scope = $rootScope.$new();
+        element = angular.element('<eh-templ></eh-templ>');
+        $compile(element)($scope); // belangrijke lijn
+        $rootScope.$digest(); // belangrijke lijn
+    }));
+
+    it('should equal "hello"', function() {
+        console.log('element tpl', element.prop('outerHTML'));
+        expect(element.find('div').text()).to.equal('--hello--');
+        expect(element.find('div')).to.have.class('tpl'); // dit is van jquery-chai
+    });
+
+});
+
+
+
+
+describe('directive ehAlert', function() {
+
+    beforeEach(module('myApp'));
+    beforeEach(module('ehAlert.tpl.html')); // deze module heeft dezelfde naam als de template
+
+    var element, $scope, $compile;
+    beforeEach(inject(function(_$compile_, $rootScope) {
+        $scope = $rootScope.$new();
+        $compile = _$compile_;
+    }));
+
+    function generate(string) {
+        var element = angular.element(string);
+        $compile(element)($scope); // belangrijke lijn
+        $scope.$digest(); // belangrijke lijn
+
+        return element;
+    }
+
+    it('should equal to "Dit is gelukt hoor" ', function() {
+        var content = 'Dit is gelukt hoor';
+        var element = generate('<div eh-alert type-alert="success">' + content + '</div>');
+        expect(element.find('div').text()).to.equal(content);
+    });
+
+    it('should equal have class alert-success', function() {
+        var element = generate('<div eh-alert type-alert="success">Er heeft</div>');
+        expect(element.find('div')).to.have.class('alert-success'); // dit is van jquery-chai
+    });
+
+    it('should equal have class alert-danger', function() {
+        var element = generate('<div eh-alert type-alert="danger">Er heeft</div>');
+        expect(element.find('div')).to.have.class('alert-danger'); // dit is van jquery-chai
+    });
+
+    it('should equal have class alert-info', function() {
+        var element = generate('<div eh-alert type-alert="info">Er heeft</div>');
+        expect(element.find('div')).to.have.class('alert-info'); // dit is van jquery-chai
+    });
+
+    it('should close the alert', function() {
+        var element = generate('<div eh-alert type-alert="info" close="close()">Er heeft</div>');
+        expect(element.find('div')).to.have.class('alert-info'); // dit is van jquery-chai
+    });
+
 });

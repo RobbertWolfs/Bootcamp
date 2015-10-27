@@ -71,7 +71,7 @@ describe('detailController', function () {
 
     }));
 
-    xit('should submit the form and update a person', inject(function ($controller) {
+    it('should submit the form and update a person', inject(function ($controller, $location) {
         $httpBackend.expectPUT('http://localhost:8080/api/persons/1').respond(person);
 
         var spy = sinon.spy($location, 'path');
@@ -96,8 +96,3 @@ describe('detailController', function () {
         $httpBackend.verifyNoOutstandingRequest();
     });
 });
-
-
-
-
-

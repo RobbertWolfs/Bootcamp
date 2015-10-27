@@ -16,10 +16,14 @@
 	    function activate() {
 	        customerService.getCustomers()
                 .then(function(customers) {
-                    console.log(customers);
 	                $scope.customers = customers;
 	            });
 	    }
+
+
+		function close() {
+			console.log('closed');
+		}
 
 	    function addCustomer() {
 			$scope.customers.push( {

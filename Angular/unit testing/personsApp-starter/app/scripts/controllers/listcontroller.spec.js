@@ -31,8 +31,6 @@ describe('listController', function() {
         ctrl = $controller('ListController', {
             personService: personService
         });
-
-        //$rootScope.$digest();
     }));
 
 
