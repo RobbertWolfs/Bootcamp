@@ -6,7 +6,6 @@ var AddNewPerson = require('./addNewEmployee.jsx');
 var PersonsContainer = React.createClass({
     getInitialState: function () {
         return {
-            title: 'Persons',
             users: [
                 {
                     id: 1,
@@ -33,7 +32,7 @@ var PersonsContainer = React.createClass({
     render: function () {
         return (
             <div>
-                <h1>{this.state.title}</h1>
+                <h1>Persons</h1>
                 <PersonsTable users={this.state.users}/>
                 <AddNewPerson newUser={this.state.newUser} onChange={this._handleChange} onSave={this._addNewPerson}
                               errors={this.state.errors}/>
