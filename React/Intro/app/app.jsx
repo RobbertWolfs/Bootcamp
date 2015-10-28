@@ -8,6 +8,7 @@ var EmployeeContainer = require('./components/employeeContaine.jsx');
 var Home = require('./components/home.jsx');
 var About = require('./components/about.jsx');
 var Navbar = require('./components/navbar.jsx');
+var Employee = require('./components/employee.jsx');
 
 //ReactDOM.render(<EmployeeContainer />, document.getElementById('app'));
 
@@ -37,6 +38,7 @@ ReactDOM.render((
             <IndexRoute component={Home} />
             <Route path='about' component={About} />
             <Route path='employees' component={EmployeeContainer} />
+            <Route path='employees/:name' component={Employee} />
         </Route>
     </Router>
 

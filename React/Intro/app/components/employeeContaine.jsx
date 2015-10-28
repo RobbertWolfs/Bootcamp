@@ -2,15 +2,34 @@ var React = require('react');
 var AddEmployee = require('./addNewEmployee.jsx');
 var EmployeeList = require('./employeeList.jsx');
 
+var employeeStore = require('../stores/employeeStore.js');
+var employeeActions = require('../actions/employeeActions.js');
+
 var EmployeeContainer = React.createClass({
     getInitialState: function () {
         return {
-            company: 'Euricom',
-            employees: ['Peter', 'Kevin', 'Frederik'],
+            company: employeeStore.getCompany(),
+            employees: employeeStore.getEmployees(),
             newEmployee: '',
             errors: {}
         }
     },
+
+    componentDidMount: function () {
+        employeeStore.addChangeListener(this._onStoreChange);
+    },
+
+    componentWillUnmount : function () {
+        employeeStore.removeChangeListener(this._onStoreChange);
+    },
+
+    _onStoreChange: function () {
+        this.setState({
+            company: employeeStore.getCompany(),
+            employees: employeeStore.getEmployees()
+        });
+    },
+
     render: function () {
         return (
             <div>
@@ -49,8 +68,8 @@ var EmployeeContainer = React.createClass({
 
     _addNewEmployee: function () {
         if (this._isInputValid(this.state.newEmployee)) {
+            employeeActions.addEmployee(this.state.newEmployee);
             this.setState({
-                employees: this.state.employees.concat(this.state.newEmployee),
                 newEmployee: ''
             });
         }
