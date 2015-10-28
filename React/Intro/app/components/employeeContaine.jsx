@@ -1,3 +1,7 @@
+var React = require('react');
+var AddEmployee = require('./addNewEmployee.jsx');
+var EmployeeList = require('./employeeList.jsx');
+
 var EmployeeContainer = React.createClass({
     getInitialState: function () {
         return {
@@ -53,45 +57,4 @@ var EmployeeContainer = React.createClass({
     }
 });
 
-var EmployeeList = React.createClass({
-    getDefaultProps: function () {
-        return {
-            employees: ['Wart']
-        }
-    },
-    render: function () {
-        return (
-            <ul>
-                {this._renderEmployees()}
-            </ul>
-        )
-    },
-
-    _renderEmployees: function () {
-        return this.props.employees.map(function (employee, index) {
-            return <li key={index}>{employee}</li>;
-            {/* je moet de key meegeven anders geeft hij een warning */
-            }
-        });
-    }
-});
-
-var AddEmployee = React.createClass({
-    propTypes: {
-        newEmployee: React.PropTypes.string.isRequired,
-        onChange: React.PropTypes.func.isRequired,
-        onSave: React.PropTypes.func.isRequired
-    },
-    render: function () {
-        return (
-            <div>
-                <h3>Add a new employee</h3>
-                <input type="text" value={this.props.newEmployee} onChange={this.props.onChange}/>
-                <button onClick={this.props.onSave}>Add new</button>
-                <div style={{'color' : 'red'}}>{this.props.errors.newEmployee}</div>
-            </div>
-        );
-    }
-});
-
-ReactDOM.render(<EmployeeContainer />, document.getElementById('app'));
+module.exports = EmployeeContainer;
