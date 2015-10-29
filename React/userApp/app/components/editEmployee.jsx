@@ -27,25 +27,6 @@ var EditEmployee = React.createClass({
         )
     },
 
-    _handleChange: function (e) {
-
-        var user = this.state.user;
-
-        user[e.target.name] = e.target.value;
-
-        if (e.target.type == 'checkbox') {
-            user[e.target.name] = e.target.checked;
-        }
-
-        if (e.target.type == 'number' && e.target.value) {
-            user[e.target.name] = parseInt(e.target.value);
-        }
-
-
-        this.setState({user: user});
-
-    },
-
     _updateUser: function(user) {
         PersonsActions.updateUser(user);
         this.props.history.pushState(null, '/employees');

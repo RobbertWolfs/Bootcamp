@@ -1,13 +1,16 @@
 var React = require('react');
+var Input = require('./formInput.jsx');
+var InputNumber = require('./formInputNumber.jsx');
+var InputCheckbox = require('./formInputCheckbox.jsx');
 
 var userForm = React.createClass({
     getInitialState: function () {
         return {
-            errors: {}
+            errors: {},
+            user: this.props.user
         }
     },
     propTypes: {
-        onChange: React.PropTypes.func.isRequired,
         onSave: React.PropTypes.func.isRequired,
         user: React.PropTypes.shape({
             id: React.PropTypes.number,
@@ -23,42 +26,12 @@ var userForm = React.createClass({
             <div>
                 <div>
                     <form>
-                        <div className={this._addStyleOnError(this.state.errors.name)}>
-                            <label htmlFor="exampleInputName">Name</label>
-                            <input type="text" className="form-control" value={this.props.user.name} name="name"
-                                   onChange={this.props.onChange} placeholder="Name"/>
+                        <Input type='text' name='name'  placeholder='Name' errors={this.state.errors.name} value={this.state.user.name} onChange={this._onChange}  />
+                        <Input type='email' name='email'  placeholder='Email'  errors={this.state.errors.email} value={this.state.user.email} onChange={this._onChange}  />
+                        <Input type='date' name='birthday'  placeholder='dd/mm/yyy'  errors={this.state.errors.birthday} value={this.state.user.birthday} onChange={this._onChange}  />
+                        <Input type='number' name='age'  placeholder='Age'  errors={this.state.errors.age} value={this.state.user.age} onChange={this._onChange}  />
+                        <InputCheckbox type='checkbox' name='married'   checked={this.state.user.married} onChange={this._onChange}  />
 
-                            <div style={{'color' : 'red'}}>{this.state.errors.name}</div>
-                        </div>
-                        <div className={this._addStyleOnError(this.state.errors.email)}>
-                            <label htmlFor="exampleInputEmail">Email address</label>
-                            <input type="email" className="form-control" name="email" value={this.props.user.email}
-                                   onChange={this.props.onChange} placeholder="Email"/>
-
-                            <div style={{'color' : 'red'}}>{this.state.errors.email}</div>
-                        </div>
-                        <div className={this._addStyleOnError(this.state.errors.age)}>
-                            <label htmlFor="exampleInputAge">Age</label>
-                            <input type="number" className="form-control" name="age" value={this.props.user.age}
-                                   onChange={this.props.onChange} placeholder="Age"/>
-
-                            <div style={{'color' : 'red'}}>{this.state.errors.age}</div>
-                        </div>
-                        <div className={this._addStyleOnError(this.state.errors.birthday)}>
-                            <label htmlFor="exampleInputBirthday">Birthday</label>
-                            <input type="date" className='form-control' name="birthday" value={this.props.user.birthday}
-                                   onChange={this.props.onChange} placeholder="dd/mm/yyyy"/>
-
-                            <div style={{'color' : 'red'}}>{this.state.errors.birthday}</div>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputMarried">Married</label>
-                            <input type="checkbox" checked={this.props.user.married} className='form-control'
-                                   name="married"
-                                   value={this.props.user.married}
-                                   onChange={this.props.onChange}/>
-
-                        </div>
                         <div className="form-group ">
                             <button  className="btn btn-default" onClick={this._addNewPerson}>Submit
                             </button>
@@ -68,30 +41,38 @@ var userForm = React.createClass({
             </div>
         )
     },
-    _addStyleOnError: function (elem) {
-        return elem ? 'has-error form-group' : 'form-group';
+
+    _onChange: function (field, value) {
+
+        var user = this.state.user;
+
+        user[field] = value;
+
+        this.setState({user: user});
+
     },
+    
     _isInputValid: function () {
         var isValid = true;
         var errors = {};
         var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-        if (this.props.user.name < 3) {
+        if (this.state.user.name.length < 3) {
             isValid = false;
             errors.name = 'Name must be at least 3 chars.';
         }
 
-        if (!emailRegex.test(this.props.user.email)) {
+        if (!emailRegex.test(this.state.user.email)) {
             errors.email = 'Invalid email';
             isValid = false;
         }
 
-        if (this.props.user.age < 18) {
+        if (this.state.user.age < 18) {
             errors.age = 'Age cannot be smaller than 18';
             isValid = false;
         }
 
-        if (this.props.user.birthday === '') {
+        if (this.state.user.birthday === '') {
             errors.birthday = 'You left the field blank';
             isValid = false;
         }
@@ -107,8 +88,8 @@ var userForm = React.createClass({
         e.preventDefault();
 
 
-        if (this._isInputValid(this.props.user)) {
-            var user = this.props.user;
+        if (this._isInputValid(this.state.user)) {
+            var user = this.state.user;
             this.setState({user: user});
 
             this.props.onSave(user);

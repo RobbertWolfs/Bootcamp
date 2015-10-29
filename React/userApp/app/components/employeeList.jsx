@@ -69,6 +69,7 @@ var PersonsTable = React.createClass({
 
     _renderMarried: function (married) {
 
+
         if (married) {
             return <span className="glyphicon glyphicon-check"></span>
         }
