@@ -13,37 +13,39 @@ var PersonsTable = React.createClass({
         }))
     },
     render: function () {
-        if (this.props.users && this.props.users.length === 0) {
+        if (this.props.users && this.props.users.length > 0) {
             return (
-                <div><br/>No employees present</div>
+
+                <div>
+
+                    <table className="table table-striped">
+
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                            <th>Birthday</th>
+                            <th>Married</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this._renderPersons()}
+                        </tbody>
+                    </table>
+
+
+                </div>
             )
         }
 
         return (
-
-            <div>
-
-                <table className="table table-striped">
-
-                    <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Age</th>
-                        <th>Birthday</th>
-                        <th>Married</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this._renderPersons()}
-                    </tbody>
-                </table>
-
-
-            </div>
+            <div><br/>No employees present</div>
         )
+
+
     },
 
     _renderPersons: function () {

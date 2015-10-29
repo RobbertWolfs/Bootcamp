@@ -3,25 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 var appDispatcher = require('../appDispatcher.js');
 var _ = require('underscore');
 
-var users = [
-    {
-        id: 1,
-        name: 'Robbert Wolfs',
-        email: "frederik.bouillon@euri.com",
-        age: 22,
-        birthday: "16/04/1987",
-        married: false
-    },
-    {
-        id: 2,
-        name: 'Peter Cosemans',
-        email: "peter.cosemans@euri.com",
-        age: 51,
-        birthday: "06/10/1964",
-        married: false
-    }
-];
-
+var users;
 
 var generateUserId = function (users) {
     if (users.length > 0) {
@@ -45,6 +27,9 @@ var updateUser = function (person) {
 var removePerson = function (person) {
     users = _.without(users, _.findWhere(users, {id: person}));
 };
+
+
+
 
 var personsStore = ObjectAssign({}, EventEmitter.prototype, {
     removeChangeListener: function (cb) {
@@ -80,6 +65,10 @@ appDispatcher.register(function (payload) {
             break;
         case 'UPDATE_PERSON' :
             updateUser(action.data);
+            personsStore.emit('CHANGE_EVENT');
+            break;
+        case 'LOADED_USERS' :
+            users = action.data;
             personsStore.emit('CHANGE_EVENT');
             break;
         default :

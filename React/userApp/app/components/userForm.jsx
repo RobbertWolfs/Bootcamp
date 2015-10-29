@@ -2,6 +2,7 @@ var React = require('react');
 var Input = require('./formInput.jsx');
 var InputNumber = require('./formInputNumber.jsx');
 var InputCheckbox = require('./formInputCheckbox.jsx');
+var moment = require('moment');
 
 var userForm = React.createClass({
     getInitialState: function () {
@@ -22,13 +23,14 @@ var userForm = React.createClass({
         })
     },
     render: function () {
+
         return (
             <div>
                 <div>
                     <form>
                         <Input type='text' name='name'  placeholder='Name' errors={this.state.errors.name} value={this.state.user.name} onChange={this._onChange}  />
                         <Input type='email' name='email'  placeholder='Email'  errors={this.state.errors.email} value={this.state.user.email} onChange={this._onChange}  />
-                        <Input type='date' name='birthday'  placeholder='dd/mm/yyy'  errors={this.state.errors.birthday} value={this.state.user.birthday} onChange={this._onChange}  />
+                        <Input type='date' name='birthday'  placeholder='dd/mm/yyy'  errors={this.state.errors.birthday} value={ moment(this.state.user.birthday, "DD/MM/YYYY").format("YYYY-MM-DD")} onChange={this._onChange}  />
                         <Input type='number' name='age'  placeholder='Age'  errors={this.state.errors.age} value={this.state.user.age} onChange={this._onChange}  />
                         <InputCheckbox type='checkbox' name='married'   checked={this.state.user.married} onChange={this._onChange}  />
 
@@ -88,12 +90,12 @@ var userForm = React.createClass({
         e.preventDefault();
 
 
-        if (this._isInputValid(this.state.user)) {
+        //if (this._isInputValid(this.state.user)) {
             var user = this.state.user;
             this.setState({user: user});
 
             this.props.onSave(user);
-        }
+        //}
     }
 });
 

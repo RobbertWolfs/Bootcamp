@@ -1,12 +1,15 @@
 var ReactDOM = require('react-dom');
 var React = require('react'); // dit is nodig omdat de compile van <PersonsContainer /> React.CreateClass maakt
 
+
 var createBrowserHistory = require('history/lib/createBrowserHistory'); /* createBrowserHistory zorgt voor schone urls */
+
 
 var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
+
 
 var PersonsContainer = require('./components/personsContainer.jsx');
 var Home = require('./components/home.jsx');
@@ -14,6 +17,8 @@ var About = require('./components/about.jsx');
 var Navbar = require('./components/navbar.jsx');
 var AddEmployees = require('./components/addEmployees.jsx');
 var EditEmployee = require('./components/editEmployee.jsx');
+
+var personsActions = require('./actions/personsActions');
 
 var App = React.createClass({
     render: function() {
@@ -23,6 +28,9 @@ var App = React.createClass({
                 {this.props.children}
             </div>
         )
+    },
+    componentWillMount : function() {
+        personsActions.getUsers();
     }
 });
 
