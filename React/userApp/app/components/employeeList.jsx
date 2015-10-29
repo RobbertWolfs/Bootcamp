@@ -1,5 +1,5 @@
 var React = require('react');
-
+var Link = require('react-router').Link;
 
 var PersonsTable = React.createClass({
     propTypes: {
@@ -13,22 +13,36 @@ var PersonsTable = React.createClass({
         }))
     },
     render: function () {
+        if (this.props.users && this.props.users.length === 0) {
+            return (
+                <div><br/>No employees present</div>
+            )
+        }
+
         return (
-            <table className="table table-striped">
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Age</th>
-                    <th>Birthday</th>
-                    <th>Married</th>
-                </tr>
-                </thead>
-                <tbody>
-                {this._renderPersons()}
-                </tbody>
-            </table>
+
+            <div>
+
+                <table className="table table-striped">
+
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Age</th>
+                        <th>Birthday</th>
+                        <th>Married</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this._renderPersons()}
+                    </tbody>
+                </table>
+
+
+            </div>
         )
     },
 
@@ -38,12 +52,17 @@ var PersonsTable = React.createClass({
         return this.props.users.map(function (user, index) {
             return <tr key={index}>
                 <td>{user.id}</td>
-                <td>{user.name}</td>
+                <td><Link to={`/employees/${user.id}`}>{user.name}</Link></td>
                 <td>{user.email}</td>
                 <td>{user.age}</td>
                 <td>{user.birthday}</td>
                 <td>{self._renderMarried(user.married)}</td>
-
+                <td>
+                    <Link to={`/employees/${user.id}`}><button className="btn btn-success">Edit
+                    </button></Link>
+                    <button onClick={self.props.removeUser.bind(null, user.id)} className="btn btn-danger">Remove
+                    </button>
+                </td>
             </tr>
         })
     },

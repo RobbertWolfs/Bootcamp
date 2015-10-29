@@ -12,7 +12,8 @@ var PersonsContainer = require('./components/personsContainer.jsx');
 var Home = require('./components/home.jsx');
 var About = require('./components/about.jsx');
 var Navbar = require('./components/navbar.jsx');
-var Employee = require('./components/employee.jsx');
+var AddEmployees = require('./components/addEmployees.jsx');
+var EditEmployee = require('./components/editEmployee.jsx');
 
 var App = React.createClass({
     render: function() {
@@ -32,7 +33,8 @@ ReactDOM.render((
             <IndexRoute  component={Home} />
             <Route path="about" component={About} /> {/* door het te nesten gaat hij atomatisch naar /about */}
             <Route path="employees" component={PersonsContainer} />
-            <Route path="employees/:name" component={Employee} />
+            <Route path="employees/add" component={AddEmployees} />
+            <Route path="employees/:id" component={EditEmployee} />
         </Route>
     </Router>
 ), document.getElementById('app'));

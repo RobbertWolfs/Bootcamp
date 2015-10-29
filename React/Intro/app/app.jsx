@@ -1,7 +1,6 @@
 var ReactDOM = require('react-dom');
 var React = require('react');
 
-
 var CreateBrowserHistory = require('history/lib/createBrowserHistory');
 
 var EmployeeContainer = require('./components/employeeContaine.jsx');

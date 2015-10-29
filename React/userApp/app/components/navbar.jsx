@@ -2,10 +2,14 @@ var React = require('react');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
 
+var PersonsCounterStore = require('../stores/personCounterStore');
+var PersonStore = require('../stores/personsStore');
+
 var Navbar = React.createClass({
     getInitialState: function () {
         return {
-            currentActive: 'home'
+            currentActive: 'home',
+            userLength : PersonsCounterStore.getUserCount()
         }
     },
     render: function () {
@@ -20,12 +24,19 @@ var Navbar = React.createClass({
                                                                       onClick={this._toggleActiveClass.bind(null, 'about')}>About</Link>
                         </li>
                         <li className={this._isActive('employees')}><Link to="/employees"
-                                                                          onClick={this._toggleActiveClass.bind(null, 'employees')}>Employees</Link>
+                                                                          onClick={this._toggleActiveClass.bind(null, 'employees')}>Employees ({this.state.userLength})</Link>
                         </li>
                     </ul>
                 </div>
             </nav>
         )
+    },
+
+
+    _onStoreChange : function () {
+        this.setState({
+            userLength : PersonsCounterStore.getUserCount()
+        });
     },
 
     _toggleActiveClass: function (elem) {
@@ -45,6 +56,14 @@ var Navbar = React.createClass({
                 currentActive: this.props.current
             });
         }
+
+        PersonsCounterStore.addChangeListener(this._onStoreChange);
+
+    },
+
+
+    componentWillUnmount : function() {
+        PersonsCounterStore.removeChangeListener(this._onStoreChange);
     }
 });
 
