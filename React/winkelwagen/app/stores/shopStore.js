@@ -7,10 +7,9 @@ import constants from '../appConstants.js';
 var _catalog = [];
 var _cartItems = [];
 
-if (localStorage.getItem("products")) {
-    _cartItems = JSON.parse(localStorage.getItem("products"));
+if (localStorage.getItem("cart")) {
+    _cartItems = JSON.parse(localStorage.getItem("cart"));
 }
-
 
 /* Data */
 for (var i = 1; i < 9; i++) {
@@ -22,6 +21,7 @@ for (var i = 1; i < 9; i++) {
         'cost': i
     });
 }
+
 
 function addProduct(product) {
 
@@ -50,8 +50,12 @@ function updateProduct(product, type) {
     if (type === 'plus') {
         _cartItems[index].total += 1;
     } else {
-        _cartItems[index].total -= 1;
-
+        if(_cartItems[index].total > 1) {
+            _cartItems[index].total -= 1;
+        }
+        else {
+            deleteProduct(product);
+        }
     }
 
 
@@ -59,79 +63,81 @@ function updateProduct(product, type) {
 }
 
 function saveLocalStorage(cartItems) {
-    localStorage.products = JSON.stringify(cartItems);
+    localStorage.cart = JSON.stringify(cartItems);
 }
 
 
-var shopStore = ObjectAssign({}, EventEmitter.prototype, {
-    getProducts: function () {
+class ShopStore extends EventEmitter {
+    constructor(props) {
+        super(props);
+        appDispatcher.register((payload) => {
+            var action = payload.action;
+
+            switch (action.actionType) {
+                case constants.ADD_PRODUCT :
+                    addProduct(action.data);
+                    this.emit(constants.CHANGE_EVENT);
+                    break;
+                case constants.DELETE_PRODUCT :
+                    deleteProduct(action.data);
+                    this.emit(constants.CHANGE_EVENT);
+                    break;
+                case constants.UPDATE_PRODUCT :
+                    updateProduct(action.data, action.type);
+                    this.emit(constants.CHANGE_EVENT);
+                    break;
+                default :
+                    return true;
+            }
+        });
+    }
+
+    getProducts() {
         return _catalog;
-    },
+    }
 
-    getCart: function () {
+    getCart() {
         return _cartItems;
-    },
+    }
 
-    getCartTotal: function () {
+    getCartTotal() {
         var total = 0;
 
-        _.each(_cartItems, function (product) {
+        _.each(_cartItems, (product) => {
             total += product.total;
         });
 
         return total;
-    },
+    }
 
-    getCartTotalPrice: function () {
+    getCartTotalPrice() {
         var totalPrice = 0;
 
-        _.each(_cartItems, function (product) {
-            totalPrice += (product.total * product.cost);
-        });
+        _.each(_cartItems, (product) => {
+                totalPrice += (product.total * product.cost);
+            }
+        );
 
         return totalPrice;
-    },
+    }
 
-    getProduct: function (id) {
+    getProduct(id) {
         var product = _.findWhere(_catalog, {id: Number(id)});
         return product;
-    },
+    }
 
-    getProductTotal: function (id) {
+    getProductTotal(id) {
         var product = _.findWhere(_catalog, {id: Number(id)});
         return product.total;
-    },
+    }
 
-    addChangeListener: function (cb) {
+    addChangeListener(cb) {
         this.on(constants.CHANGE_EVENT, cb);
-    },
+    }
 
-    removeChangeListener: function (cb) {
+    removeChangeListener(cb) {
         this.removeListener(constants.CHANGE_EVENT, cb);
     }
+}
 
-});
-
-appDispatcher.register(function (payload) {
-    var action = payload.action;
-
-    switch (action.actionType) {
-        case constants.ADD_PRODUCT :
-            addProduct(action.data);
-            shopStore.emit(constants.CHANGE_EVENT);
-            break;
-        case constants.DELETE_PRODUCT :
-            deleteProduct(action.data);
-            shopStore.emit(constants.CHANGE_EVENT);
-            break;
-        case constants.UPDATE_PRODUCT :
-            updateProduct(action.data, action.type);
-            shopStore.emit(constants.CHANGE_EVENT);
-            break;
-        default :
-            return true;
-    }
-
-});
-
-module.exports = shopStore;
+module.exports = new ShopStore();

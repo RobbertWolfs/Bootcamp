@@ -2,11 +2,22 @@ import {Dispatcher} from 'flux';
 var appDispatcher = new Dispatcher();
 
 
-appDispatcher.handleAction = function(action) {
-    this.dispatch({
-        action : action
-    })
-};
+class AppDispatcher extends Dispatcher {
+    handleAction(action) {
+        this.dispatch({
+            action : action
+        })
+    };
+}
+//
+//
+//appDispatcher.handleAction = function(action) {
+//    this.dispatch({
+//        action : action
+//    })
+//};
+//
+//
+//module.exports = appDispatcher;
 
-
-module.exports = appDispatcher;
+export default new AppDispatcher();
