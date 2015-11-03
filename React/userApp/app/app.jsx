@@ -1,24 +1,23 @@
-var ReactDOM = require('react-dom');
-var React = require('react'); // dit is nodig omdat de compile van <PersonsContainer /> React.CreateClass maakt
+import ReactDOM from 'react-dom';
+import React from 'react';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import {ReactRouter, Router, Route, IndexRoute} from 'react-router';
 
-
-var createBrowserHistory = require('history/lib/createBrowserHistory'); /* createBrowserHistory zorgt voor schone urls */
-
-
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRoute = ReactRouter.IndexRoute;
-
-
-var PersonsContainer = require('./components/personsContainer.jsx');
-var Home = require('./components/home.jsx');
-var About = require('./components/about.jsx');
-var Navbar = require('./components/navbar.jsx');
-var AddEmployees = require('./components/addEmployees.jsx');
-var EditEmployee = require('./components/editEmployee.jsx');
-
-var personsActions = require('./actions/personsActions');
+import PersonsContainer from './components/personsContainer.jsx';
+import Home from './components/home.jsx';
+import About from './components/about.jsx';
+import Navbar from './components/navbar.jsx';
+import AddEmployees from './components/addEmployees.jsx';
+import EditEmployee from './components/editEmployee.jsx';
+import personsActions from './actions/personsActions';
+//
+//var PersonsContainer = require('./components/personsContainer.jsx');
+//var Home = require('./components/home.jsx');
+//var About = require('./components/about.jsx');
+//var Navbar = require('./components/navbar.jsx');
+//var AddEmployees = require('./components/addEmployees.jsx');
+//var EditEmployee = require('./components/editEmployee.jsx');
+//var personsActions = require('./actions/personsActions');
 
 var App = React.createClass({
     render: function() {

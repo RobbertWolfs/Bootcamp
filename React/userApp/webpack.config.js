@@ -18,12 +18,16 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin() //allows instantaneous live refresh without losing state while editing React components
     ],
     module: {
-        loaders: [{
-            //tell webpack to use jsx-loader for all *.jsx files
-            test: /\.jsx$/,
-            loaders: ['react-hot', 'babel'],
-            include: path.join(__dirname, 'app'),
-            exclude : ['node_modules']
-        }]
+        //loaders: [{
+        //    //tell webpack to use jsx-loader for all *.jsx files
+        //    test: '\.jsx$/',
+        //    loaders: ['react-hot', 'babel-loader'],
+        //    include: path.join(__dirname, 'app'),
+        //    exclude : ['node_modules']
+        //}]
+
+        loaders: [
+            { test: /\.(jsx|js)$/, exclude: /node_modules/, loader: "babel-loader"},
+        ]
     }
 };

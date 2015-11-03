@@ -1,5 +1,7 @@
-var dispatcher = require('flux').Dispatcher;
-var AppDispatcher = new dispatcher();
+//var dispatcher = require('flux').Dispatcher;
+import {Dispatcher} from 'flux';
+var AppDispatcher = new Dispatcher();
+
 
 AppDispatcher.handleAction = function (action) {
     this.dispatch({
@@ -7,6 +9,5 @@ AppDispatcher.handleAction = function (action) {
         }
     )
 };
-
 
 module.exports = AppDispatcher;

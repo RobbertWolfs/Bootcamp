@@ -1,0 +1,124 @@
+mixin clients()
+    li
+        .client
+            img(src="#{attributes['url']}")
+            p
+                | #{attributes['text']}
+                span @#{attributes['name']}
+
+mixin software()
+    li
+        div(class=[attributes['class']])
+            i(class=['fa', attributes['icon']])
+            h4 #{attributes['title']}
+            p #{attributes['text']}
+
+mixin contact()
+    li
+        div(class=[attributes['class']])
+            i(class=['fa', attributes['icon']])
+            h4 #{attributes['title']}
+            p #{attributes['text']}
+
+doctype html
+html(lang="en")
+  head
+    title= pageTitle
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Montserrat:400,700")
+    link(rel="stylesheet", href="style.css")
+  body
+    header
+        nav.main-nav
+            .wrapper
+                .logo
+                    i.fa.fa-hand-spock-o
+                ul
+                    each val in ['Services', 'About', 'Clients', 'Carreers', 'Contact']
+                        li= val
+        .full-height
+            .content
+                h1 Looking for racers
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas quod atque asperiores illo est, nemo voluptatum vero aliquid! Corrupti voluptatibus quas nisi recusandae atque maiores voluptatem tempore cupiditate, facilis mollitia?
+
+    #container.col
+        article.services
+            .wrapper
+                h2 Our Services
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, cupiditate accusantium numquam dolore, ratione excepturi eveniet odio dignissimos minus provident hic incidunt eos reiciendis est nam nesciunt nostrum consectetur impedit.
+                ul
+                    +software()(
+                        type = 'software',
+                        icon = 'fa-terminal',
+                        title = 'Custom Software'
+                        text = "My money's in the office, right?")
+                    +software()(
+                        type = 'mobile',
+                        icon = 'fa-mobile',
+                        title = 'Mobile app'
+                        text = "if she start giving me some bullshit about it ain't here")
+                    +software()(
+                        type = 'm',
+                        icon = 'fa-black-tie',
+                        title = 'Sourcing'
+                        text = " Then I'm gonna shoot that bitch in the kneecaps")
+        article.who-are-we.orange
+            .wrapper
+                h2 Who are we
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti ab, ullam est iste fugit ipsam suscipit aperiam nam sunt? Soluta quaerat sit eos suscipit nulla dolorum, atque aliquid, dolore rerum?
+        article.clients
+            .wrapper
+                h2 Clients we worked with
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla autem, facere possimus quod doloribus alias distinctio dolore quam. Accusantium, aperiam voluptate est voluptas in consectetur quisquam quod. Rem, eaque, deleniti!
+                ul.our-clients
+                    +clients()(
+                        url = 'https://s3.amazonaws.com/uifaces/faces/twitter/ritu/128.jpg',
+                        text = 'What an awesome experience! We would love it to have them back.',
+                        name = 'robbert')
+                    +clients()(
+                        url = 'https://s3.amazonaws.com/uifaces/faces/twitter/rem/128.jpg',
+                        text = 'What an awesome experience! We would love it to have them back.',
+                        name = 'robbert')
+                    +clients()(
+                        url = 'https://s3.amazonaws.com/uifaces/faces/twitter/kurafire/128.jpg',
+                        text = 'What an awesome experience! We would love it to have them back.',
+                        name = 'robbert')
+                    +clients()(
+                        url = 'https://s3.amazonaws.com/uifaces/faces/twitter/mattchevy/128.jpg',
+                        text = 'What an awesome experience! We would love it to have them back.',
+                        name = 'robbert')
+        article.work-here.orange
+            .wrapper
+                h2 Want to work here?
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate aut et sint necessitatibus veniam, tenetur iste a quaerat numquam omnis praesentium, expedita architecto quisquam quod ipsa magnam repudiandae distinctio illo.
+                button.contact-us Can't wait to join us?
+        article.in-touch
+            .wrapper
+                h2 Let's get in touch
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos suscipit veniam earum quam distinctio officia ducimus, porro ea dicta sint ullam maiores mollitia, aliquam recusandae voluptatibus omnis odit eaque eos?
+                ul
+                    +contact()(
+                        icon = 'fa-hand-peace-o',
+                        text = 'info@rainbow.com'
+                        )
+                    +contact()(
+                        icon = 'fa-safari',
+                        text = 'rainbow road 1 mario land'
+                        )
+                    +contact()(
+                        icon = 'fa-microphone',
+                        text = '0800 rainbow'
+                        )
+    footer
+        p ç 2015
+        p Rainbow NV - Rainbow Road, Mario Land
+
+
+
+

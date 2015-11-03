@@ -1,6 +1,10 @@
-var ObjectAssign = require('react/lib/Object.assign');
-var EventEmitter = require('events').EventEmitter;
-var appDispatcher = require('../appDispatcher');
+//var ObjectAssign = require('react/lib/Object.assign');
+//var EventEmitter = require('events').EventEmitter;
+//var appDispatcher = require('../appDispatcher');
+
+import ObjectAssign from 'react/lib/Object.assign';
+import {EventEmitter} from 'events';
+import appDispatcher from '../appDispatcher.js';
 
 var usersLength = 0;
 

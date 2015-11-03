@@ -22,7 +22,6 @@ for (var i = 1; i < 9; i++) {
     });
 }
 
-
 function addProduct(product) {
 
     var index = _.findIndex(_cartItems, {id: Number(product.id)});
