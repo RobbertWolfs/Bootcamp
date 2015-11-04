@@ -1,0 +1,24 @@
+section {
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.section__colored--orange {
+    background-color: orange;
+}
+
+section:nth-child(even) {
+    padding: 5em;
+    transform: skew(0deg, 5);
+    -ms-transform: skew(0deg, 5deg);
+    /* IE 9 */
+    -webkit-transform: skew(0deg, 2.5deg);
+    /* Safari and Chrome */
+}
+
+
+section:nth-child(even) .section__wrapper {
+    transform: skew(0deg, -5deg);
+    -ms-transform: skew(0deg, -5deg);
+    -webkit-transform: skew(0deg, -2.5deg);
+}

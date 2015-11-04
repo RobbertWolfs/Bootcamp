@@ -1,0 +1,18 @@
+.services ul::after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.service {
+    list-style-type: none;
+    display: block;
+    float: left;
+    width: 33.33%;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.service__icon {
+    font-size: 5em;
+}

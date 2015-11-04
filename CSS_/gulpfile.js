@@ -11,7 +11,8 @@ gulp.task('templates', function() {
 
 gulp.task('watch', function() {
 
-gulp.watch('./*.jade', ['templates'])
+gulp.watch('./**/*.jade', ['templates'])
+
 });
 
 

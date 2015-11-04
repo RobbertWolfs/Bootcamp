@@ -1,0 +1,26 @@
+
+mixin contact()
+    li(class='contact')
+        i(class=['fa', attributes['icon']])
+        p #{attributes['text']}
+
+
+section.in-touch
+    .section__wrapper
+        h2 Let's get in touch
+        p.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos suscipit veniam earum quam distinctio officia ducimus, porro ea dicta sint ullam maiores mollitia, aliquam recusandae voluptatibus omnis odit eaque eos?
+        ul
+            +contact()(
+                icon = 'fa-hand-peace-o',
+                text = 'info@rainbow.com'
+                )
+            +contact()(
+                icon = 'fa-safari',
+                text = 'rainbow road 1 mario land'
+                )
+            +contact()(
+                icon = 'fa-microphone',
+                text = '0800 rainbow'
+                )
+

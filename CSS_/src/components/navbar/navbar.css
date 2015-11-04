@@ -1,0 +1,60 @@
+.main-nav .wrapper::after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.main-nav {
+    padding: 1rem 0rem;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    top: 0px;
+    z-index: 10;
+    border-bottom : 1px orange solid;
+}
+
+
+.main-nav ul {
+    cursor: pointer;
+    float: right;
+    margin: 0em;
+    line-height: 2rem;
+    text-transform: uppercase;
+    color: orange;
+}
+
+.main-nav ul li {
+    display: inline-block;
+    margin: 0em 1em;
+}
+
+.main-nav ul li:hover {
+    color: cyan;
+}
+
+nav {
+    font-size: 1.4rem;
+}
+
+
+
+.logo {
+    float: left;
+    font-size: 1.6rem;
+    line-height: 1.6rem;
+    color: orange;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+}
+
+.logo:hover {
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+}

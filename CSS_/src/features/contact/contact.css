@@ -1,0 +1,33 @@
+.contact-us {
+    background-color: transparent;
+    border : 2px white solid;
+    color : white;
+    padding: 1em;
+}
+
+.contact-us:hover {
+    border-color : cyan;
+    color : cyan;
+    cursor: pointer;
+}
+
+
+.contact-us ul::after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.contact {
+    list-style-type: none;
+    display: block;
+    float: left;
+    width: 33.33%;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+/*
+.service__icon {
+    font-size: 5em;
+}
+*/

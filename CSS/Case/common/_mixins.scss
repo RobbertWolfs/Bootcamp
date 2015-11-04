@@ -1,0 +1,3 @@
+@mixin fixed_background($url) {
+  background: url($url) no-repeat fixed;
+}

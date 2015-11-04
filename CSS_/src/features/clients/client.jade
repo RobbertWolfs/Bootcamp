@@ -1,0 +1,29 @@
+mixin clients()
+    li.client
+        img(src="#{attributes['url']}")
+        p
+            | #{attributes['text']}
+            span @#{attributes['name']}
+
+section.clients
+            .section__wrapper
+                h2 Clients we worked with
+                p.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla autem, facere possimus quod doloribus alias distinctio dolore quam. Accusantium, aperiam voluptate est voluptas in consectetur quisquam quod. Rem, eaque, deleniti!
+                ul.our-clients
+                    +clients()(
+                        url = 'https://s3.amazonaws.com/uifaces/faces/twitter/ritu/128.jpg',
+                        text = 'What an awesome experience! We would love it to have them back.',
+                        name = 'robbert')
+                    +clients()(
+                        url = 'https://s3.amazonaws.com/uifaces/faces/twitter/rem/128.jpg',
+                        text = 'What an awesome experience! We would love it to have them back.',
+                        name = 'robbert')
+                    +clients()(
+                        url = 'https://s3.amazonaws.com/uifaces/faces/twitter/kurafire/128.jpg',
+                        text = 'What an awesome experience! We would love it to have them back.',
+                        name = 'robbert')
+                    +clients()(
+                        url = 'https://s3.amazonaws.com/uifaces/faces/twitter/mattchevy/128.jpg',
+                        text = 'What an awesome experience! We would love it to have them back.',
+                        name = 'robbert')

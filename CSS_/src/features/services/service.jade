@@ -1,0 +1,27 @@
+mixin service()
+    li(class=['service', attributes['type']])
+        i(class=['service__icon fa', attributes['icon']])
+        h4 #{attributes['title']}
+        p #{attributes['text']}
+
+section.services
+    .section__wrapper
+        h2 Our Services
+        p.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, cupiditate accusantium numquam dolore, ratione excepturi eveniet odio dignissimos minus provident hic incidunt eos reiciendis est nam nesciunt nostrum consectetur impedit.
+        ul
+            +service()(
+                type = 'software',
+                icon = 'fa-terminal',
+                title = 'Custom Software'
+                text = "My money's in the office, right?")
+            +service()(
+                type = 'mobile',
+                icon = 'fa-mobile',
+                title = 'Mobile app'
+                text = "if she start giving me some bullshit about it ain't here")
+            +service()(
+                type = 'm',
+                icon = 'fa-black-tie',
+                title = 'Sourcing'
+                text = " Then I'm gonna shoot that bitch in the kneecaps")

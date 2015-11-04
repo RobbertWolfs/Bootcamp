@@ -1,0 +1,16 @@
+.hero {
+    @include fixed_background('http://www.dezondag.be/wp-content/uploads/2015/09/ewceaczxo2pgcd45fhau.jpg');
+
+    display: table;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+    width: 100%;
+
+    @extend %colored_section_overlay;
+}
+
+
+.hero__content {
+    @extend %content_vertical_align;
+}
